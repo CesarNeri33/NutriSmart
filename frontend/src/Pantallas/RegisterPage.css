@@ -1,0 +1,91 @@
+/* src/screens/RegisterPage.css */
+
+.top {
+    padding: 20px 40px;
+    font-size: 24px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+}
+
+.register-logo-container {
+    text-align: center;
+    margin-top: -70px; 
+}
+
+.RegisterCard {
+    background: #faf3a8;
+    width: 80%;
+    max-width: 850px;
+    margin: 0px auto 20px auto; /* Aumentamos el margen superior para hacer espacio al logo */
+    padding: 25px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.back {
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.title {
+    text-align: center;
+    margin-top: -10px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 70%;
+    margin: 0 auto;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input {
+    padding: 8px;
+    border: none;
+    background: #d9d9d9;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.photo-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.photo-btn {
+    background: #c4e68a;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.photo-box {
+    width: 90px;
+    height: 90px;
+    border: 2px solid gray;
+    background: #e6e6e6;
+}
+
+.submit-btn {
+    background: #e8c25c;
+    border: none;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #d4ac45;
+}

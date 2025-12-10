@@ -1,0 +1,86 @@
+/* src/screens/LoginPage.css */
+
+.top {
+    padding: 20px 40px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+}
+
+.top .title{
+    margin-top: 10px;
+}
+
+.login-logo-container {
+    text-align: center;
+    margin-top: -70px; 
+}
+
+.LoginCard {
+    background: #faf3a8;
+    width: 80%;
+    max-width: 850px;
+    margin: 0px auto;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.loginCard .back {
+    font-size: 22px;
+    cursor: pointer;
+    /* Para font-awesome, necesitas importarlo globalmente, como lo hiciste en el HTML */
+}
+
+.title {
+    text-align: center;
+    margin-top: -5px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input {
+    padding: 8px;
+    border: none;
+    background: #d9d9d9;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.login-btn {
+    background: #e8c25c;
+    border: none;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background: #d4ac45;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.register-link a {
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}

@@ -1,0 +1,145 @@
+.profile-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.containerAccount {
+    width: 100%;
+    max-width: 400px; 
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 20px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #dceca2; 
+    border-bottom: 2px solid #f8c7a4;
+    justify-content: center; 
+    gap: 15px;
+}
+
+.header .logo {
+    margin: 0;
+    display: block;
+}
+
+.header .title {
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #000000;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    line-height: 1.2; 
+}
+
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-header h2 {
+    margin: 0;
+    padding-top: 20px;
+    font-size: 1.5em;
+    flex-grow: 1;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.contenido-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+.avatar-perfil {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    border: 3px solid #f8c7a4;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-icono {
+    font-size: 5em;
+    color: #555;
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-bottom: 15px;
+    width: 80%;
+    max-width: 250px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.btn-red {
+    background-color: #e27a7a; 
+    color: white;
+}
+
+.btn-red:hover {
+    background-color: #cc6a6a;
+}
+
+.btn-green {
+    background-color: #77d37b; 
+    color: white;
+}
+
+.btn-green:hover {
+    background-color: #61bb65;
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 10px;
+        border-radius: 10px;
+    }
+    .header {
+        padding: 10px 15px;
+    }
+    .profile-card {
+        margin: 15px;
+        padding: 15px;
+    }
+    .avatar-perfil {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+    }
+    .avatar-icono {
+        font-size: 4em;
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+}

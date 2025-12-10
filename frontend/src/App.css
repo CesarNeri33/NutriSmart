@@ -1,38 +1,33 @@
-.App {
-  text-align: center;
+/* src/App.css */
+
+html {
+    overflow-y: scroll;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Reglas del Body para el fondo de TODA la aplicación */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    
+    /* Patrón de repetición con una inclinación */
+    background: repeating-linear-gradient(
+        -15deg, /* La inclinación diagonal */
+        #fbeed8,
+        #fbeed8 150px, /* Color 1: de 0px a 150px */
+        #f8c7a4 150px,
+        #f8c7a4 300px, /* Color 2: de 150px a 300px */
+        #dceca2 300px,
+        #dceca2 450px  /* Color 3: de 300px a 450px. El patrón se repite cada 450px */
+    );
+    
+    min-height: 100vh;
+    
+    overflow-x: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Reglas de Reset para los enlaces (Link) que actúan como botones */
+.login, .registrar {
+    text-decoration: none; /* Quita el subrayado que trae por defecto el Link */
+    display: inline-block; /* Permite que el padding y el tamaño funcionen */
+    text-align: center;
 }

@@ -1,0 +1,85 @@
+/* Estilos Específicos para StartPage */
+
+.start-page-container {
+    padding-top: 20px;
+    width: 85%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.header-top .title{
+    margin-top: 10px;
+}
+
+.brand-name {
+    font-size: 46px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: left;
+    margin: 0; /* Asegurar que no haya margen superior/inferior por defecto */
+    flex-grow: 1; /* Permitir que ocupe espacio para empujar el logo */
+}
+
+.mensaje-bienvenido {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 50px;
+    margin-top: 40px;
+    font-family: 'Fredoka', sans-serif;
+    color: #333;
+}
+
+.botones {
+    display: flex;
+    flex-direction: column; 
+    gap: 25px;
+    width: 100%;
+    max-width: 350px; /* Limitar el ancho de los botones en escritorio */
+    margin: 0 auto;
+}
+
+.botones button {
+    border: none;
+    padding: 20px 30px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.botones button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-buscador {
+    background-color: #A3D9D0; 
+    color: #000;
+}
+
+.btn-listas {
+    background-color: #EFE675; 
+    color: #000;
+}
+
+.btn-ayuda {
+    background-color: #F4A467; 
+    color: #000;
+}
+
+.btn-padecimientos {
+    background-color: #f46767; 
+    color: #000;
+}

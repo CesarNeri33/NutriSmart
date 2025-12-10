@@ -1,0 +1,25 @@
+.recent-item {
+    margin: 0px 0;
+}
+
+.recent-item .bars {
+    display: flex;
+    gap: 5px;
+    margin: 8px auto;
+    justify-content: center;
+}
+
+.icono-producto {
+    height: 40px;
+    width: 40px;
+}
+
+.recent-item .bars .bar {
+    height: 8px;
+    border-radius: 5px;
+    width: 80px;
+}
+
+.rojo { background: #e27a7a; }
+.amarillo { background: #e5d077; }
+.verde { background: #77d37b; }

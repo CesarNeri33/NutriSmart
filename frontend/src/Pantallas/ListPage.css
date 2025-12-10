@@ -1,0 +1,83 @@
+/* Estilos Específicos para ListPage */
+
+.list-page-container {
+    width: 85%;
+    margin: auto;
+    margin-top: 20px;
+    background: transparent;
+    text-align: center;
+    padding-bottom: 30px; /* Espacio inferior */
+}
+
+.button-group-wrapper {
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    gap: 20px; /* Espacio entre los botones */
+    margin: 20px auto;
+    width: fit-content; /* Ajusta el ancho al contenido para centrar el grupo */
+}
+
+.list-back,
+.btn-nueva-lista {
+    background: #FDF59C; /* Amarillo brillante */
+    border: none;
+    padding: 12px 25px;
+    font-size: 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s, transform 0.2s;
+    margin-bottom: 20px; /* Mantenemos el margen inferior */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    /* ELIMINAMOS los margin-left/right: auto; para que Flexbox los centre */
+    margin-left: 0; 
+    margin-right: 0;
+}
+
+.list-back:hover,
+.btn-nueva-lista:hover {
+    background-color: #fce883; /* Tono más oscuro al pasar el ratón */
+    transform: translateY(-2px); /* Efecto de elevación sutil */
+}
+
+/* Estilos para el Componente Anidado (ListItem) */
+.objeto-listas {
+    background: #A8E4D5; /* Teal/Azul verdoso */
+    margin: 12px auto;
+    padding: 12px 18px;
+    width: 90%; /* Ajuste para ocupar bien el ancho */
+    max-width: 500px; /* Limitar el ancho máximo para mejor lectura */
+    border-radius: 12px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s;
+}
+
+.objeto-listas:hover {
+    transform: translateX(5px);
+    cursor: pointer; /* Indica que la lista es clickable */
+}
+
+.iconos i {
+    margin-left: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: color 0.1s;
+}
+
+.iconos .fa-pen:hover {
+    color: #4CAF50; /* Un verde para editar */
+}
+
+.iconos .fa-trash:hover {
+    color: #F44336; /* Un rojo para eliminar */
+}
