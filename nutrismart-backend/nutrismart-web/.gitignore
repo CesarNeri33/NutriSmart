@@ -1,0 +1,5 @@
+# Dependencias de Node/Vite
+/node_modules
+/dist
+.env
+.env.local
