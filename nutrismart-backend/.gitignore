@@ -1,0 +1,11 @@
+# Dependencias y Logs
+/node_modules
+.cache
+.tmp
+build
+logs
+
+# Archivos Sensibles de Strapi
+/public/uploads
+/database/data.db
+.env

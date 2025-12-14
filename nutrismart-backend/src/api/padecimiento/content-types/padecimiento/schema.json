@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "padecimientos",
+  "info": {
+    "singularName": "padecimiento",
+    "pluralName": "padecimientos",
+    "displayName": "Padecimiento"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "tipo": {
+      "type": "enumeration",
+      "enum": [
+        "alergia",
+        "deficiencia",
+        "enfermedad",
+        "otra"
+      ]
+    },
+    "descripcion": {
+      "type": "text"
+    },
+    "ingredientes_prohibidos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::ingrediente-oculto.ingrediente-oculto",
+      "mappedBy": "padecimientos"
+    },
+    "usuarios": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "padecimientos"
+    }
+  }
+}

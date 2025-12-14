@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ingrediente_ocultos",
+  "info": {
+    "singularName": "ingrediente-oculto",
+    "pluralName": "ingrediente-ocultos",
+    "displayName": "ingrediente oculto"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre_oculto": {
+      "type": "string"
+    },
+    "tipo_impacto": {
+      "type": "string"
+    },
+    "descripcion": {
+      "type": "text"
+    },
+    "padecimientos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::padecimiento.padecimiento",
+      "inversedBy": "ingredientes_prohibidos"
+    },
+    "alimentos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::alimento.alimento",
+      "mappedBy": "contiene_ingredientes"
+    }
+  }
+}

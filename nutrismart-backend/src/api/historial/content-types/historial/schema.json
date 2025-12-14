@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "historials",
+  "info": {
+    "singularName": "historial",
+    "pluralName": "historials",
+    "displayName": "historial"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fecha_escaneo": {
+      "type": "datetime"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "historials"
+    },
+    "alimento": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::alimento.alimento",
+      "inversedBy": "historials"
+    }
+  }
+}

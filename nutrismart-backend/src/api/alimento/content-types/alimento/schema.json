@@ -1,0 +1,92 @@
+{
+  "kind": "collectionType",
+  "collectionName": "alimentos",
+  "info": {
+    "singularName": "alimento",
+    "pluralName": "alimentos",
+    "displayName": "alimento"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    },
+    "codigo_barras": {
+      "type": "string",
+      "unique": true
+    },
+    "categoria": {
+      "type": "string"
+    },
+    "cantidad_total": {
+      "type": "decimal"
+    },
+    "unidad_medida": {
+      "type": "enumeration",
+      "enum": [
+        "g",
+        "ml"
+      ]
+    },
+    "energia_kcal_100": {
+      "type": "decimal"
+    },
+    "azucares_100": {
+      "type": "decimal"
+    },
+    "sodio_100": {
+      "type": "decimal"
+    },
+    "grasas_sat_100": {
+      "type": "decimal"
+    },
+    "grasas_trans_100": {
+      "type": "decimal"
+    },
+    "leyenda_cafeina": {
+      "type": "boolean"
+    },
+    "sello_calorias": {
+      "type": "boolean"
+    },
+    "sello_azucares": {
+      "type": "boolean"
+    },
+    "sello_sodio": {
+      "type": "boolean"
+    },
+    "sello_grasas_sat": {
+      "type": "boolean"
+    },
+    "sello_grasas_trans": {
+      "type": "boolean"
+    },
+    "historials": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::historial.historial",
+      "mappedBy": "alimento"
+    },
+    "favoritos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::favorito.favorito",
+      "mappedBy": "alimento"
+    },
+    "contiene_ingredientes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::ingrediente-oculto.ingrediente-oculto",
+      "inversedBy": "alimentos"
+    },
+    "Sello_de_Grasa_Saturada": {
+      "type": "boolean"
+    },
+    "Sello_de_Sodio": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "favoritos",
+  "info": {
+    "singularName": "favorito",
+    "pluralName": "favoritos",
+    "displayName": "favorito"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "favoritos"
+    },
+    "alimento": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::alimento.alimento",
+      "inversedBy": "favoritos"
+    }
+  }
+}
