@@ -1,81 +1,161 @@
-// src/screens/RegisterPage.js
-
-import React from 'react';
-import {Link, useNavigate } from 'react-router-dom';
-import Title from '../Componentes/Title'; // Reutilizamos el LogoTitle (aunque solo usaremos el logo aquí)
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Title from '../Componentes/Title'; 
 import Logo from '../Componentes/Logo';
-import './RegisterPage.css'; // Importamos los estilos específicos
+import './RegisterPage.css'; 
 
 const RegisterPage = () => {
-    // Hook para la navegación
     const navigate = useNavigate();
+    
+    // 1. Estados para guardar los datos del formulario
+    const [nombre, setNombre] = useState('');
+    const [email, setEmail] = useState(''); // AGREGADO: Strapi lo necesita obligatorio
+    const [password, setPassword] = useState('');
+    
+    // Estos campos son visuales por ahora (Strapi por defecto no los trae, 
+    // pero los dejamos aquí para que tu formulario no pierda su forma)
+    const [apellidoPaterno, setApellidoPaterno] = useState('');
+    const [apellidoMaterno, setApellidoMaterno] = useState('');
+    const [fechaNacimiento, setFechaNacimiento] = useState('');
 
-    // Función para manejar el clic en el ícono de "Atrás"
+    const [error, setError] = useState('');
+
     const handleGoBack = () => {
-        navigate('/'); // Regresa a la página anterior (debe ser la de Login o Welcome)
+        navigate('/'); 
     };
 
-    // Función que manejará el envío del formulario
-    const handleSubmit = (e) => {
+    // 2. Función de Registro real conectada a Strapi
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Intentando registrar nuevo usuario...");
-        // Aquí iría la lógica real de registro
+        setError('');
 
-        // Navegacion provicional
-        navigate('/iniciar-sesion')
+        // Validación simple
+        if (!nombre || !email || !password) {
+            setError("Por favor llena Nombre, Email y Contraseña.");
+            return;
+        }
+
+        try {
+            console.log("Enviando datos a Strapi...");
+            
+            const response = await fetch('http://localhost:1337/api/auth/local/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: nombre, // Usaremos el Nombre como Username
+                    email: email,     // OBLIGATORIO
+                    password: password,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (data.error) {
+                setError("Error: El usuario o correo ya existen.");
+            } else {
+                console.log("Registro exitoso:", data);
+                
+                // Auto-login: Guardamos el token
+                localStorage.setItem('token', data.jwt);
+                localStorage.setItem('user', JSON.stringify(data.user));
+
+                alert(`¡Cuenta creada! Bienvenido ${data.user.username}`);
+                
+                // Redirigimos directo al inicio (ya logueado)
+                navigate('/inicio');
+            }
+        } catch (err) {
+            console.error(err);
+            setError("Error de conexión con el servidor.");
+        }
     };
 
     return (
         <div className="register-screen-container">
             
-            {/* 1. Encabezado Superior (Manteniendo la clase 'top' para estilos de fuente) */}
             <header className="top">
                 <Title />
             </header>
             
-            {/* 2. Contenedor del Logo (Reutilizado) */}
             <div className="register-logo-container">
-                {/* NOTA: Si quieres que el logo se muestre como un componente independiente, 
-                   podrías usar <LogoTitle />, pero en este caso solo necesitamos la imagen
-                   para aplicar los estilos de .logo, por lo que la dejamos como <img>.
-                */}
                 <Logo />
             </div>
 
-            {/* 3. La tarjeta principal */}
             <div className="RegisterCard">
 
-                {/* Botón de Atrás (funcional con React Router) */}
                 <div className="back" onClick={handleGoBack}>
                     <i className="fa-solid fa-chevron-left"></i>
                 </div>
 
                 <h2 className="title">Registro.</h2>
 
-                {/* 4. Formulario de Registro */}
                 <form className="form" onSubmit={handleSubmit}>
 
-                    <label htmlFor="nombre">Nombre:</label>
-                    <input type="text" id="nombre" />
+                    {/* Nombre (Lo usaremos como Username) */}
+                    <label htmlFor="nombre">Nombre de Usuario:</label>
+                    <input 
+                        type="text" 
+                        id="nombre" 
+                        value={nombre}
+                        onChange={(e) => setNombre(e.target.value)}
+                        required
+                    />
+
+                    {/* --- NUEVO CAMPO EMAIL (OBLIGATORIO PARA STRAPI) --- */}
+                    <label htmlFor="email">Correo Electrónico:</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="ejemplo@correo.com"
+                        required
+                    />
+                    {/* --------------------------------------------------- */}
 
                     <label htmlFor="apellidoPaterno">Apellido Paterno:</label>
-                    <input type="text" id="apellidoPaterno" />
+                    <input 
+                        type="text" 
+                        id="apellidoPaterno" 
+                        value={apellidoPaterno}
+                        onChange={(e) => setApellidoPaterno(e.target.value)}
+                    />
 
                     <label htmlFor="apellidoMaterno">Apellido Materno:</label>
-                    <input type="text" id="apellidoMaterno" />
+                    <input 
+                        type="text" 
+                        id="apellidoMaterno"
+                        value={apellidoMaterno}
+                        onChange={(e) => setApellidoMaterno(e.target.value)}
+                    />
 
                     <label htmlFor="fechaNacimiento">Fecha de Nacimiento:</label>
-                    <input type="date" id="fechaNacimiento" />
+                    <input 
+                        type="date" 
+                        id="fechaNacimiento"
+                        value={fechaNacimiento}
+                        onChange={(e) => setFechaNacimiento(e.target.value)}
+                    />
 
                     <label htmlFor="password">Contraseña:</label>
-                    <input type="password" id="password" />
+                    <input 
+                        type="password" 
+                        id="password" 
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        minLength="6"
+                    />
 
-                    {/* Sección de Foto de Perfil */}
                     <div className="photo-section">
-                        {/* El botón debe ser type="button" para no enviar el formulario */}
                         <button type="button" className="photo-btn">Sube tu Foto</button>
                         <div className="photo-box"></div>
                     </div>
+
+                    {/* Mensaje de error si falla */}
+                    {error && <p style={{ color: 'red', textAlign: 'center', marginBottom: '10px' }}>{error}</p>}
 
                     <button type="submit" className="submit-btn">Terminar Registro</button>
 
