@@ -1,0 +1,11 @@
+table:
+  name: ayuda
+  schema: public
+array_relationships:
+  - name: ayuda_nutrientes
+    using:
+      foreign_key_constraint_on:
+        column: ayuda_id
+        table:
+          name: ayuda_nutriente
+          schema: public

@@ -1,16 +1,10 @@
-/* ---------------------------------------------------- */
-/* Estilos Globales y de Fondo (Replicando el gradiente) */
-/* ---------------------------------------------------- */
+/* src/Pantallas/ProductListPage.css */
 .product-page-wrapper {
     padding-top: 20px;
     width: 85%;
     margin: 0 auto;
     text-align: center;
 }
-
-/* ---------------------------------------------------- */
-/* Header (Adaptado del HTML original) */
-/* ---------------------------------------------------- */
 
 .header-top {
     display: flex;
@@ -54,27 +48,6 @@
     color: #4CAF50; /* Verde hover */
 }
 
-/* ---------------------------------------------------- */
-/* Título de la Lista */
-/* ---------------------------------------------------- */
-
-.titulo_lista {
-    background: #faf3a8;
-    width: 300px;
-    padding: 12px;
-    margin: 20px auto;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 22px;
-    font-weight: bold;
-    font-family: 'Gill Sans', Calibri, sans-serif;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* ---------------------------------------------------- */
-/* Lista de Productos */
-/* ---------------------------------------------------- */
-
 .lista_productos {
     width: 90%;
     max-width: 900px;
@@ -114,10 +87,6 @@
     font-family: 'Gill Sans', Calibri, sans-serif;
 }
 
-/* ---------------------------------------------------- */
-/* Botón de Borrar */
-/* ---------------------------------------------------- */
-
 .delete-btn {
     background: none;
     border: none;
@@ -136,9 +105,6 @@
     height: 24px;
 }
 
-/* ---------------------------------------------------- */
-/* Botón de Añadir */
-/* ---------------------------------------------------- */
 
 .add-btn-wrapper {
     margin: 20px auto;
@@ -159,4 +125,62 @@
 
 .add-btn:hover {
     background: #45a049;
+}
+
+.search-card {
+  position: relative;
+}
+
+.list-search-suggestions {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 110%;
+  max-width: 600px;
+
+  background: #fff;
+  border-radius: 14px;
+  padding: 12px;
+
+  max-height: 320px;
+  overflow-y: auto;
+
+  z-index: 1000;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+.titulo_lista_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centra el conjunto */
+  gap: 10px; /* espacio entre botón y título */
+  margin-bottom: 20px;
+}
+
+.titulo_lista {
+  background: #faf3a8;
+  padding: 12px 20px;
+  border-radius: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: 'Gill Sans', Calibri, sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: auto; /* para que no fuerce 300px */
+  text-align: center; /* opcional */
+}
+
+.btn-regresar {
+  background-color: #faf3a8;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-regresar:hover {
+  background-color: #b2ad79;
 }

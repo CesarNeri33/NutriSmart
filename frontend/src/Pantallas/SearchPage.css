@@ -51,6 +51,7 @@
     padding: 15px;
     border-radius: 15px;
     text-align: center;
+    position: relative;
 }
 
 .search-card h2 {
@@ -81,11 +82,25 @@
     background-color: transparent;
 }
 
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 95%;
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
 .recent-card {
     background: #faf3a8;
     width: 80%;
     max-width: 800px;
-    margin: 30px auto;
+    margin: 20px auto;
     border-radius: 20px;
     padding: 25px;
     text-align: center;

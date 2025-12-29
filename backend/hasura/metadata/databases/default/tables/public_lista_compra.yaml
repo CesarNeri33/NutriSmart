@@ -1,0 +1,15 @@
+table:
+  name: lista_compra
+  schema: public
+object_relationships:
+  - name: usuario
+    using:
+      foreign_key_constraint_on: usuario_id
+array_relationships:
+  - name: lista_productos
+    using:
+      foreign_key_constraint_on:
+        column: lista_id
+        table:
+          name: lista_producto
+          schema: public

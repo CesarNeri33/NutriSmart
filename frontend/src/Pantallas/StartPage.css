@@ -36,12 +36,12 @@
     color: #333;
 }
 
-.botones {
+/*.botones {
     display: flex;
     flex-direction: column; 
     gap: 25px;
     width: 100%;
-    max-width: 350px; /* Limitar el ancho de los botones en escritorio */
+    max-width: 350px;
     margin: 0 auto;
 }
 
@@ -57,6 +57,55 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}*/
+
+.botones {
+    display: grid;
+    /* Dividimos en 6 columnas pequeñas para tener más control */
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 20px;
+    width: 100%;
+    max-width: 500px; 
+    margin: 0 auto;
+}
+
+.botones i {
+    padding: 5px;
+    font-size: 40px;
+}
+
+.botones button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    aspect-ratio: 1 / 1; 
+    width: 100%; /* El botón ocupará todo el ancho de las columnas asignadas */
+    
+    /* Tus estilos de diseño */
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease-in-out;
+}
+
+/* FILA SUPERIOR: Cada botón ocupa 2 de las 6 columnas */
+.botones button:nth-child(1),
+.botones button:nth-child(2),
+.botones button:nth-child(3) {
+    grid-column: span 2;
+}
+
+.botones button:nth-child(4) {
+    grid-column: 2 / 4; 
+}
+
+.botones button:nth-child(5) {
+    grid-column: 4 / 6;
 }
 
 .botones button:hover {
@@ -81,5 +130,10 @@
 
 .btn-padecimientos {
     background-color: #f46767; 
+    color: #000;
+}
+
+.btn-cerrar-sesion {
+    background-color: #d41a1a; 
     color: #000;
 }

@@ -1,0 +1,113 @@
+/* src/Componentes/ModalCard.css */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-card h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 380px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  animation: fadeIn 0.25s ease;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;   /* ⬅️ centra horizontal */
+  gap: 12px;                 /* separación entre botones */
+  margin-top: 20px;
+}
+
+/* ===== Modal crear lista (solo ListPage) ===== */
+
+.lista-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.lista-modal-input {
+  width: 100%;
+  box-sizing: border-box; /* ✅ CLAVE */
+  padding: 10px 14px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.lista-modal-input:focus {
+  border-color: #77d37b;
+}
+
+.lista-modal-actions {
+  justify-content: space-between; /* sobrescribe el center SOLO aquí */
+}
+
+.btn-cancelar {
+  flex: 1;
+  background: #b85151;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.btn-cancelar:hover {
+  background: #6b1b1b;
+}
+
+.btn-crear {
+  flex: 1;
+  background: #77d37b;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.btn-crear:hover {
+  background: #2e6831;
+}
+
+.btn-crear:disabled{
+  flex: 1;
+  background: #77d37b;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.btn-crear:disabled {
+  background: #bdbdbd;
+  cursor: not-allowed;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

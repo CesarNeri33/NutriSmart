@@ -1,41 +1,55 @@
 // src/components/RecentItem.js
-
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RecentItem.css';
-// Importamos el CSS para que conozca las clases .item, .bars, .bar, .rojo, .verde, etc.
-// En este caso, como los estilos son específicos, lo importamos del CSS de la pantalla.
-// Si esta tarjeta se usara en muchas pantallas, sería mejor un 'RecentItem.css'.
 
-// Por ahora, usamos una prop llamada 'data' para simular un producto
-const RecentItem = ({ data }) => {
-    const navigate = useNavigate();
+const RecentItem = ({ id, nombre, cantidad, medida, imagen, niveles, valores, onSelect }) => {
+  const navigate = useNavigate();
+  const [imgError, setImgError] = useState(false);
 
-    // Handler para navegar al Home (al hacer clic en el título)
-    const handleProductClick = () => {
-        navigate('/producto'); 
-    };
+  const handleProductClick = () => {
+    if (onSelect) onSelect();
+    navigate(`/producto/${id}`);
+  };
 
-    // Simulación de niveles (si fueran bajo, medio, alto)
-    const fatClass = 'rojo'; // Ejemplo: nivel de grasa alto
-    const sugarClass = 'amarillo'; // Ejemplo: nivel de azúcar medio
-    const sodiumClass = 'verde'; // Ejemplo: nivel de sodio bajo
+  const mostrarImagen = imagen && !imgError;
 
-    return (
-        <div className="recent-item"
-            onClick={handleProductClick}
-            title="Ir al Producto"
-        >
-            <p><strong>{data.name || 'Nombre del Producto'}</strong></p>
-            <div className="bars">
-                {/* Nota: En una app real, estas clases se determinarían dinámicamente con lógica */}
-                <i class="fa-solid fa-bottle-water fa-2xl icono-producto"></i>
-                <div className={`bar ${fatClass}`}></div>
-                <div className={`bar ${sugarClass}`}></div>
-                <div className={`bar ${sodiumClass}`}></div>
-            </div>
+  return (
+    <div className="recent-item-card" onClick={handleProductClick}>
+      
+      {/* Columna izquierda */}
+      <div className="recent-item-image">
+        {mostrarImagen ? (
+          <img
+            src={imagen}
+            alt={nombre}
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <i className="fa-solid fa-bottle-water icono-producto"></i>
+        )}
+      </div>
+
+      {/* Columna derecha */}
+      <div className="recent-item-content">
+        <p className="recent-item-name">{nombre} {cantidad}{medida}</p>
+        <div className="recent-item-bars">
+          <div className={`bar ${niveles.grasas}`}>
+            Grasas {valores.grasas} g
+          </div>
+
+          <div className={`bar ${niveles.azucar}`}>
+            Azúcar {valores.azucar} g
+          </div>
+
+          <div className={`bar ${niveles.sodio}`}>
+            Sodio {valores.sodio} mg
+          </div>
         </div>
-    );
+      </div>
+
+    </div>
+  );
 };
 
 export default RecentItem;

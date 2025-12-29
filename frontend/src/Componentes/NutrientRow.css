@@ -1,0 +1,35 @@
+.nutrient-row {
+  border-radius: 6px;
+  padding: 18px 8px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.nutrient-label {
+  display: block;
+  font-weight: 600;
+}
+
+.nutrient-value {
+  display: block;
+  font-size: 13px;
+}
+
+/* Colores iguales a RecentItem */
+.verde {
+  background: #77d37b;
+}
+
+.amarillo {
+  background: #e5d077;
+}
+
+.rojo {
+  background: #e27a7a;
+}
+
+/* Nutrientes no críticos */
+.info {
+  background: #b1ebff;
+  color: #000000;
+}

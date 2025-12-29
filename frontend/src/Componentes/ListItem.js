@@ -1,3 +1,4 @@
+//src/Componentes/ListItem.js 
 import React from 'react';
 // El CSS ya está importado en ListPage, no es necesario aquí si solo se usa ahí.
 // Si se reutiliza en otro lugar, se recomienda un CSS propio.

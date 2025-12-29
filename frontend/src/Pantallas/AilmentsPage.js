@@ -1,85 +1,146 @@
-import React, { useState } from 'react';
+// src/Pantallas/AilmentsPage.js 
+import React, { useState, useEffect } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Componentes/Header';
 import './AilmentsPage.css';
-
-// Catálogo FALSO de padecimientos disponibles
-const availableAilments = [
-    { id: 1, name: 'Diabetes Tipo 2' },
-    { id: 2, name: 'Hipertensión Arterial' },
-    { id: 3, name: 'Colesterol Alto' },
-    { id: 4, name: 'Enfermedad Celíaca (Gluten)' },
-    { id: 5, name: 'Intolerancia a la Lactosa' },
-    { id: 6, name: 'Alergia al Maní' },
-    { id: 7, name: 'Alergia a Mariscos' },
-    { id: 8, name: 'Gota' },
-];
+import {
+  GET_PADECIMIENTOS,
+  GET_USUARIO_PADECIMIENTOS
+} from '../graphql/query';
+import {
+    INSERT_USUARIO_PADECIMIENTO, 
+    DELETE_USUARIO_PADECIMIENTO
+} from '../graphql/mutations';
 
 const AilmentsPage = () => {
-    // Estado para la lista de padecimientos seleccionados por el usuario
-    const [userAilments, setUserAilments] = useState([
-        { id: 2, name: 'Hipertensión Arterial' },
-        { id: 5, name: 'Intolerancia a la Lactosa' },
-    ]);
-    // Estado para controlar la visibilidad del modal
+    const navigate = useNavigate();
+
+    // Modal
     const [isModalOpen, setIsModalOpen] = useState(false);
-    // Estado para el valor seleccionado en el dropdown del modal
-    const [selectedAilment, setSelectedAilment] = useState(availableAilments[0].name);
 
-    // Muestra el modal y resetea el valor seleccionado al primer elemento
-    const handleOpenModal = () => {
-        if (availableAilments.length > 0) {
-            setSelectedAilment(availableAilments[0].name);
-        }
-        setIsModalOpen(true);
-    };
+    // ID del padecimiento seleccionado
+    const [selectedAilmentId, setSelectedAilmentId] = useState(null);
 
-    // Oculta el modal
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-    };
-
-    // Agrega el padecimiento seleccionado a la lista del usuario
-    const handleSaveAilment = () => {
-        if (!selectedAilment) {
-            console.log("Debe seleccionar un padecimiento.");
-            return;
-        }
-
-        const newAilment = availableAilments.find(a => a.name === selectedAilment);
-        
-        // Evita agregar duplicados
-        if (newAilment && !userAilments.some(a => a.id === newAilment.id)) {
-            setUserAilments([...userAilments, newAilment]);
-        }
-        
-        handleCloseModal();
-    };
-
-    // Elimina un padecimiento de la lista
-    const handleDeleteAilment = (idToRemove) => {
-        // En lugar de window.confirm()
-        console.log(`Padecimiento ${idToRemove} marcado para eliminación.`); 
-        
-        setUserAilments(userAilments.filter(a => a.id !== idToRemove));
-    };
-
-
-    // Filtra los padecimientos disponibles para que el usuario no seleccione duplicados
-    const getFilteredAilments = () => {
-        const selectedIds = userAilments.map(a => a.id);
-        return availableAilments.filter(a => !selectedIds.includes(a.id));
-    };
+    // Padecimientos del usuario
+    const [userAilments, setUserAilments] = useState([]);
     
+    // Datos de usuario
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    const usuarioId = usuario?.usuario_id;
+
+    // Todos los padecimientos
+    const { data: padecimientosData } = useQuery(GET_PADECIMIENTOS);
+
+    // Padecimientos del usuario
+    const {
+    data: usuarioPadecimientosData,
+    refetch: refetchUsuarioPadecimientos
+    } = useQuery(
+    GET_USUARIO_PADECIMIENTOS,
+    {
+        variables: { usuario_id: usuarioId },
+        skip: !usuarioId
+    }
+    );
+
+    const [insertUsuarioPadecimiento] = useMutation(
+    INSERT_USUARIO_PADECIMIENTO
+    );
+
+    const [deleteUsuarioPadecimiento] = useMutation(
+    DELETE_USUARIO_PADECIMIENTO
+    );
+
+    // Catálogo real de padecimientos
+    const availableAilments = padecimientosData?.padecimiento || [];
+
+    // Cargar padecimientos del usuario
+    useEffect(() => {
+    if (usuarioPadecimientosData) {
+        setUserAilments(
+        usuarioPadecimientosData.usuario_padecimiento.map(up => ({
+            id: up.padecimiento.padecimiento_id,
+            nombre: up.padecimiento.nombre,
+            descripcion: up.padecimiento.descripcion
+        }))
+        );
+        console.log('📥 Padecimientos del usuario:', usuarioPadecimientosData);
+    }
+    }, [usuarioPadecimientosData]);
+
+    const handleOpenModal = () => {
+    if (availableAilments.length > 0) {
+        setSelectedAilmentId(availableAilments[0].padecimiento_id);
+    }
+    setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+    setIsModalOpen(false);
+    };
+
+    const handleSaveAilment = async () => {
+    if (!selectedAilmentId || ailmentsToDisplay.length === 0) return;
+
+    try {
+        await insertUsuarioPadecimiento({
+        variables: {
+            usuario_id: usuarioId,
+            padecimiento_id: selectedAilmentId
+        }
+        });
+
+        await refetchUsuarioPadecimientos();
+        handleCloseModal();
+    } catch (error) {
+        console.error('Error al guardar padecimiento:', error);
+    }
+    };
+
+    const handleDeleteAilment = async (idToRemove) => {
+    try {
+        await deleteUsuarioPadecimiento({
+        variables: {
+            usuario_id: usuarioId,
+            padecimiento_id: idToRemove
+        }
+        });
+        await refetchUsuarioPadecimientos();
+    } catch (error) {
+        console.error('Error al eliminar padecimiento:', error);
+    }
+    };
+
+    const getFilteredAilments = () => {
+    const selectedIds = userAilments.map(a => a.id);
+    return availableAilments.filter(
+        a => !selectedIds.includes(a.padecimiento_id)
+    );
+    };
+
     const ailmentsToDisplay = getFilteredAilments();
 
-    const navigate = useNavigate();
-    
-    // Función para manejar el clic en el ícono de "Atrás"
-    const handleGoBack = () => {
-        navigate('/inicio'); // Regresa a la página anterior en el historial
-    };
+    useEffect(() => {
+    // Si ya no hay padecimientos disponibles → limpiar selección
+    if (ailmentsToDisplay.length === 0) {
+        setSelectedAilmentId(null);
+        return;
+    }
+    // Si no hay selección o la selección ya no existe → tomar el primero válido
+    if (
+        selectedAilmentId === null ||
+        !ailmentsToDisplay.some(
+        a => a.padecimiento_id === selectedAilmentId
+        )
+    ) {
+        setSelectedAilmentId(ailmentsToDisplay[0].padecimiento_id);
+    }
+    }, [ailmentsToDisplay]);
 
+    const handleGoBack = () => {
+    navigate('/inicio');
+    };
 
     return (
         <div className="ailment-page-wrapper">
@@ -105,7 +166,7 @@ const AilmentsPage = () => {
                         <ul className="ailment-lista">
                             {userAilments.map(ailment => (
                                 <li key={ailment.id}>
-                                    <span className="ailment-name">• {ailment.name}</span>
+                                    <span className="ailment-name">• {ailment.nombre}</span>
                                     <button 
                                         className="ailment-btn-delete" 
                                         onClick={() => handleDeleteAilment(ailment.id)}
@@ -131,34 +192,32 @@ const AilmentsPage = () => {
                         <h3>Seleccionar padecimiento</h3>
                         
                         {/* Dropdown (Select) */}
-                        {ailmentsToDisplay.length > 0 ? (
-                            <select 
-                                className="ailment-input-select"
-                                value={selectedAilment}
-                                onChange={(e) => setSelectedAilment(e.target.value)}
+                        <select
+                        className="ailment-input-select"
+                        value={selectedAilmentId || ''}
+                        onChange={(e) => setSelectedAilmentId(parseInt(e.target.value))}
+                        >
+                        {ailmentsToDisplay.map(ailment => (
+                            <option
+                            key={ailment.padecimiento_id}
+                            value={ailment.padecimiento_id}
+                            title={ailment.descripcion}
                             >
-                                {ailmentsToDisplay.map(ailment => (
-                                    <option key={ailment.id} value={ailment.name}>
-                                        {ailment.name}
-                                    </option>
-                                ))}
-                            </select>
-                        ) : (
-                            <p className="ailment-input-select-empty">
-                                No hay más opciones disponibles para agregar.
-                            </p>
-                        )}
+                            {ailment.nombre}
+                            </option>
+                        ))}
+                        </select>
                         
                         <div className="ailment-modal-actions">
                             <button className="ailment-btn-cancel" onClick={handleCloseModal}>
                                 Cancelar
                             </button>
-                            <button 
-                                className="ailment-btn-save" 
-                                onClick={handleSaveAilment}
-                                disabled={ailmentsToDisplay.length === 0}
+                            <button
+                            className="ailment-btn-save"
+                            onClick={handleSaveAilment}
+                            disabled={!selectedAilmentId || ailmentsToDisplay.length === 0}
                             >
-                                Guardar
+                            Guardar
                             </button>
                         </div>
                     </div>

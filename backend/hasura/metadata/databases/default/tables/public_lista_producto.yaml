@@ -1,0 +1,10 @@
+table:
+  name: lista_producto
+  schema: public
+object_relationships:
+  - name: lista_compra
+    using:
+      foreign_key_constraint_on: lista_id
+  - name: producto
+    using:
+      foreign_key_constraint_on: producto_id

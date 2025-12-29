@@ -1,0 +1,10 @@
+table:
+  name: padecimiento_nutriente
+  schema: public
+object_relationships:
+  - name: nutriente
+    using:
+      foreign_key_constraint_on: nutriente_id
+  - name: padecimiento
+    using:
+      foreign_key_constraint_on: padecimiento_id

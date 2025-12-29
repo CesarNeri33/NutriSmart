@@ -1,0 +1,10 @@
+table:
+  name: usuario_padecimiento
+  schema: public
+object_relationships:
+  - name: padecimiento
+    using:
+      foreign_key_constraint_on: padecimiento_id
+  - name: usuario
+    using:
+      foreign_key_constraint_on: usuario_id

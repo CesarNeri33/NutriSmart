@@ -89,3 +89,13 @@ input {
 .submit-btn:hover {
     background: #d4ac45;
 }
+
+.avatar-preview {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px; /* usa 50% si lo quieres circular */
+  margin: 10px auto;
+  display: block;
+  border: 1px solid #ccc;
+}

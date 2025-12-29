@@ -1,0 +1,18 @@
+table:
+  name: padecimiento
+  schema: public
+array_relationships:
+  - name: padecimiento_nutrientes
+    using:
+      foreign_key_constraint_on:
+        column: padecimiento_id
+        table:
+          name: padecimiento_nutriente
+          schema: public
+  - name: usuario_padecimientos
+    using:
+      foreign_key_constraint_on:
+        column: padecimiento_id
+        table:
+          name: usuario_padecimiento
+          schema: public

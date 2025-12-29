@@ -1,92 +1,211 @@
+// src/Pantallas/ListPage.js
 import React, { useState } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_LISTAS_USUARIO, INSERT_LISTA, DELETE_LISTA, UPDATE_LISTA } from '../graphql/listas';
 import { useNavigate } from 'react-router-dom';
 import ListItem from '../Componentes/ListItem';
 import Header from '../Componentes/Header';
+import ModalCard from '../Componentes/ModalCard';
 import './ListPage.css';
 
-// Datos de ejemplo simulando las listas de la BD
-const dummyLists = [
-    { id: 1, name: 'Lista de Despensa Semanal' },
-    { id: 2, name: 'Artículos para la Cena' },
-    { id: 3, name: 'Productos Sin Sellos' },
-    { id: 4, name: 'Compra de Frutas y Verduras' },
-    { id: 5, name: 'Pendientes varios' },
-];
-
 const ListPage = () => {
-    const navigate = useNavigate();
-    const [lists, setLists] = useState(dummyLists);
-    
-    // Función para manejar el clic en el ícono de "Atrás"
-    const handleGoBack = () => {
-        navigate('/inicio'); // Regresa a la página anterior en el historial
+  const navigate = useNavigate();
+  const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+  const { data, loading, error } = useQuery(
+    GET_LISTAS_USUARIO,
+    {
+      variables: { usuario_id: usuario.usuario_id }
+    }
+  );
+
+  const lists = data?.lista_compra || [];
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+    const [nombreLista, setNombreLista] = useState('');
+    const [isEditing, setIsEditing] = useState(false);
+const [editingListId, setEditingListId] = useState(null);
+const [originalNombreLista, setOriginalNombreLista] = useState('');
+
+    const [insertLista, { loading: creating }] = useMutation(INSERT_LISTA, {
+    refetchQueries: ['GetListasUsuario'], // 🔄 recarga listas
+    });
+
+    const [deleteLista] = useMutation(DELETE_LISTA, {
+    refetchQueries: ['GetListasUsuario'], // 👈 mismo nombre del query
+    });
+
+    const [updateLista, { loading: updating }] = useMutation(UPDATE_LISTA, {
+  refetchQueries: ['GetListasUsuario'],
+});
+
+const isSaveDisabled =
+  !nombreLista.trim() ||
+  (isEditing && nombreLista.trim() === originalNombreLista.trim());
+
+const handleCloseModal = () => {
+  setIsModalOpen(false);
+  setIsEditing(false);
+  setEditingListId(null);
+  setNombreLista('');
+  setOriginalNombreLista('');
+};
+
+  // 🔙 Volver
+  const handleGoBack = () => {
+    navigate('/inicio');
+  };
+
+  const handleSaveList = async () => {
+  if (!nombreLista.trim()) return;
+
+  try {
+    if (isEditing) {
+      await updateLista({
+        variables: {
+          lista_id: editingListId,
+          nombre: nombreLista,
+        },
+      });
+    } else {
+      await insertLista({
+        variables: {
+          nombre: nombreLista,
+          usuario_id: usuario.usuario_id,
+        },
+      });
+    }
+
+    // limpiar estado
+    setNombreLista('');
+    setEditingListId(null);
+    setIsEditing(false);
+    setIsModalOpen(false);
+  } catch (err) {
+    console.error('Error al guardar la lista', err);
+  }
+};
+
+  const handleNewListClick = () => {
+  setIsEditing(false);
+  setEditingListId(null);
+  setNombreLista('');
+  setIsModalOpen(true);
+};
+
+  const handleListSelect = (listId) => {
+    navigate(`/listas/${listId}`);
+  };
+
+  const handleListEdit = (listId) => {
+  const lista = lists.find(l => l.lista_id === listId);
+  if (!lista) return;
+
+  setNombreLista(lista.nombre);
+  setOriginalNombreLista(lista.nombre); // 👈 clave
+  setEditingListId(listId);
+  setIsEditing(true);
+  setIsModalOpen(true);
+};
+
+  const handleListDelete = async (listId) => {
+    const confirmDelete = window.confirm(
+        '¿Estás seguro de que quieres eliminar esta lista?'
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+        await deleteLista({
+        variables: {
+            lista_id: listId,
+        },
+        });
+
+        console.log(`Lista ${listId} eliminada`);
+    } catch (err) {
+        console.error('Error al eliminar la lista:', err);
+        alert('No se pudo eliminar la lista');
+    }
     };
 
-    // Handler para crear una nueva lista (navegar a una página de creación/modal)
-    const handleNewListClick = () => {
-        console.log("Crear nueva lista activado.");
-        // navigate('/crear-lista'); // Ruta para la creación de listas
-    };
+  if (loading) {
+    return <p style={{ textAlign: 'center' }}>Cargando listas...</p>;
+  }
 
-    // Handler al hacer clic en una lista específica (entrar al detalle)
-    const handleListSelect = (listId) => {
-        console.log(`Seleccionada la lista con ID: ${listId}. Navegando a su detalle...`);
-        // navigate(`/listas/${listId}`); 
-    };
+  if (error) {
+    console.error(error);
+    return <p style={{ textAlign: 'center' }}>Error al cargar listas</p>;
+  }
 
-    // Handler al hacer clic en el lápiz (editar)
-    const handleListEdit = (listId) => {
-        console.log(`Editar lista con ID: ${listId}.`);
-        // Aquí se mostraría un modal o se cambiaría el nombre de la lista.
-    };
+  return (
+    <div className="list-page-container">
 
-    // Handler al hacer clic en el bote de basura (eliminar)
-    const handleListDelete = (listId) => {
-        if (window.confirm(`¿Estás seguro de que quieres eliminar la lista con ID ${listId}?`)) {
-            // Lógica para eliminar de Firestore (o la BD) y actualizar el estado
-            setLists(lists.filter(list => list.id !== listId));
-            console.log(`Lista ${listId} eliminada.`);
-        }
-    };
+      <Header />
 
+      <div className="button-group-wrapper">
+        <button className="list-back" onClick={handleGoBack}>
+          <i className="fa-solid fa-chevron-left"></i>
+        </button>
 
-    return (
-        <div className="list-page-container">
-            
-            {/* Encabezado Superior */}
-            <Header />
+        <button className="btn-nueva-lista" onClick={handleNewListClick}>
+          Nueva Lista de Compras
+          <i className="fa-solid fa-plus"></i>
+        </button>
+      </div>
 
-            {/* Botón para crear nueva lista */}
-            <div className='button-group-wrapper'>
-                <button className="list-back" onClick={handleGoBack}>
-                    <i className="fa-solid fa-chevron-left"></i>
-                </button>
-                <button className="btn-nueva-lista" onClick={handleNewListClick}>
-                    Nueva Lista de Compras
-                    <i className="fa-solid fa-plus"></i>
-                </button>
-            </div>
+      <div className="listas-wrapper">
+        {lists.map(list => (
+          <ListItem
+            key={list.lista_id}
+            list={{
+              id: list.lista_id,
+              name: list.nombre
+            }}
+            onSelect={handleListSelect}
+            onEdit={handleListEdit}
+            onDelete={handleListDelete}
+          />
+        ))}
 
-            {/* Contenedor de Listas (Iteración de componentes ListItem) */}
-            <div className="listas-wrapper">
-                {lists.map(list => (
-                    <ListItem 
-                        key={list.id}
-                        list={list}
-                        onSelect={handleListSelect}
-                        onEdit={handleListEdit}
-                        onDelete={handleListDelete}
-                    />
-                ))}
+        {lists.length === 0 && (
+          <p style={{ marginTop: '50px', color: '#555' }}>
+            No tienes listas de compras. ¡Crea una para empezar!
+          </p>
+        )}
+      </div>
+        <ModalCard isOpen={isModalOpen} onClose={handleCloseModal}>
+        <div className="lista-modal-content">
+            <h3>{isEditing ? 'Editar lista' : 'Nueva lista'}</h3>
 
-                {lists.length === 0 && (
-                    <p style={{ marginTop: '50px', color: '#555' }}>
-                        No tienes listas de compras. ¡Crea una para empezar!
-                    </p>
-                )}
+            <input
+            className="lista-modal-input"
+            type="text"
+            placeholder="Nombre de la lista"
+            value={nombreLista}
+            onChange={(e) => setNombreLista(e.target.value)}
+            />
+
+            <div className="modal-actions lista-modal-actions">
+            <button
+                className="btn-cancelar"
+                onClick={() => setIsModalOpen(false)}
+            >
+                Cancelar
+            </button>
+
+            <button
+            className="btn-crear"
+            onClick={handleSaveList}
+            disabled={isSaveDisabled}
+            >
+            {isEditing ? 'Guardar cambios' : 'Crear'}
+            </button>
             </div>
         </div>
-    );
+        </ModalCard>
+    </div>
+  );
 };
 
 export default ListPage;

@@ -1,0 +1,101 @@
+/* src/Componentes/HelpCard.css */
+
+.help-card {
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.help-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.help-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.help-card-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-align: left;
+    color: #333;
+}
+
+/* ===========================
+   BOTÓN + / -
+=========================== */
+
+.help-card-toggle {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    background: #4CAF50;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.help-card-toggle:active {
+    transform: scale(0.95);
+}
+
+/* ===========================
+   CONTENIDO (ACORDEÓN)
+=========================== */
+
+.help-card-content {
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.help-card-content p {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(0,0,0,0.15);
+    line-height: 1.5;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+/* ===========================
+   COLORES POR TIPO
+=========================== */
+
+/* GENERAL – Amarillo */
+.help-GENERAL {
+    background: #a1ede5;
+}
+
+/* NUTRIENTE – Naranja */
+.help-NUTRIENTE {
+    background: #a4ffa3;
+}
+
+/* PADECIMIENTO – Rojo suave */
+.help-PADECIMIENTO {
+    background: #ea7f7f;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 600px) {
+    .help-card-title {
+        font-size: 1rem;
+    }
+}

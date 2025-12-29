@@ -17,7 +17,7 @@ const Logo = () => {
     return (
         <>
             <img 
-                src="logo.png"
+                src="/logo.png"
                 className="logo" 
                 alt="NutriSmart Logo"
                 onClick={handleHomeClick}

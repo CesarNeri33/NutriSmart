@@ -12,6 +12,12 @@ import ListPage from './Pantallas/ListPage';
 import HelpPage from './Pantallas/HelpPage';
 import AilmentsPage from './Pantallas/AilmentsPage';
 import ProductListPage from './Pantallas/ProductListPage';
+import TestQuery from './Pantallas/TestHasuraPage';
+import ProductsTestPage from './Pantallas/ProductsTestPage';
+import SearchResultsPage from './Pantallas/SearchResultsPage';
+import ProductPage from './Pantallas/ProductPage';
+
+import ProtectedRoute from './auth/ProtectedRoute';
 
 function App() {
   return (
@@ -23,13 +29,18 @@ function App() {
         <Route path="/registro" element={<RegisterPage />} /> 
 
         {/* Rutas Principales (Hub) */}
-        <Route path="/inicio" element={<StartPage />} />
-        <Route path="/buscar" element={<SearchPage />} /> 
+        <Route path="/inicio" element={<ProtectedRoute><StartPage /></ProtectedRoute>}/>
+        <Route path="/buscar" element={<SearchPage />} />
+        <Route path="/buscar/resultados" element={<SearchResultsPage />} />
         <Route path="/perfil" element={<AccountPage />} />
         <Route path="/listas" element={<ListPage />} />
         <Route path="/ayuda" element={<HelpPage />} />
         <Route path="/padecimientos" element={<AilmentsPage />} />
-        <Route path="/lista_productos" element={<ProductListPage />} />
+        <Route path="/listas/:listaId" element={<ProductListPage />} />
+        <Route path="/producto/:id" element={<ProductPage />} />
+
+        <Route path="/test" element={<TestQuery />} />
+        <Route path="/test-productos" element={<ProductsTestPage />} />
 
         <Route path="*" element={<h1>404 | Página no encontrada</h1>} />
       </Routes>

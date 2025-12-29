@@ -1,75 +1,135 @@
 // src/screens/LoginPage.js
 
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Usaremos useNavigate para el botón de "Atrás"
-import Title from '../Componentes/Title'; // ⬅️ Reutilizamos el componente
-import Logo from '../Componentes/Logo'; // ⬅️ Reutilizamos el componente
-import './LoginPage.css'; // ⬅️ Importamos los estilos específicos
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useLazyQuery } from '@apollo/client';
+
+import Title from '../Componentes/Title';
+import Logo from '../Componentes/Logo';
+import { LOGIN_USUARIO } from '../graphql/query';
+
+import './LoginPage.css';
 
 const LoginPage = () => {
-    // useNavigate es un Hook de React Router que permite navegar programáticamente
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    // Función para manejar el clic en el ícono de "Atrás"
-    const handleGoBack = () => {
-        navigate('/'); // Regresa a la página anterior en el historial
-    };
+const [formData, setFormData] = useState({
+  email: '',
+  password_hash: '',
+});
 
-    // Función que manejará el envío del formulario (por ahora solo previene la recarga)
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("Intentando iniciar sesión...");
-        // Navegacion provicional
-        navigate('/inicio')
-        // Aquí iría la lógica real de autenticación
-    };
+const [error, setError] = useState('');
 
-    return (
-        <div className="login-screen-container">
-            {/* 1. Encabezado superior con el título */}
-            <header className="top">
-                <Title />
-            </header>
-            <div className="login-logo-container">
-                <Logo />
-            </div>
-            
-            {/* 2. La tarjeta de Login */}
-            <div className="LoginCard">
+const [loginUsuario, { loading }] = useLazyQuery(LOGIN_USUARIO, {
+  onCompleted: (data) => {
+    console.log("📥 Respuesta completa de Hasura:", data);
 
-                {/* Botón de Atrás */}
-                {/* Reemplazamos el <div> con un <i> por una función onClick */}
-                <div className="back" onClick={handleGoBack}>
-                    <i className="fa-solid fa-chevron-left"></i>
-                </div>
+    if (!data || !data.usuario || data.usuario.length === 0) {
+      console.log("⚠️ Respuesta inválida del servidor");
+      setError('Email o contraseña incorrectos');
+      return;
+    }
 
-                {/* 3. Reutilizamos el Logo y Título, pero solo mostramos el Logo */}
-                
+    const usuario = data.usuario[0];
 
-                <h2 className="title">Inicio de Sesión.</h2>
+    localStorage.setItem('usuario', JSON.stringify(usuario));
 
-                {/* 4. Formulario de Inicio de Sesión */}
-                <form className="form" onSubmit={handleSubmit}>
+    // 🔀 Redirección por rol
+    if (usuario.rol === 'admin') {
+      window.location.href = 'http://localhost:8080/console';
+    } else {
+      navigate('/inicio');
+    }
+    
+  },
+  onError: (error) => {
+    console.error("🔥 Error al ejecutar login:", error);
+    setError('Error al conectar con el servidor');
+  }
+});
 
-                    <label htmlFor="username">Nombre:</label>
-                    <input type="text" id="username" />
+const handleChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value,
+  });
+};
 
-                    <label htmlFor="password">Contraseña:</label>
-                    <input type="password" id="password" />
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-                    <button type="submit" className="login-btn">INICIAR SESIÓN</button>
+  console.log("📨 Intentando login con:");
+  console.log({
+    email: formData.email,
+    password_hash: formData.password_hash,
+  });
 
-                </form>
+  loginUsuario({
+    variables: {
+      email: formData.email,
+      password_hash: formData.password_hash,
+    }
+  });
+};
 
-                {/* 5. Enlace para registrarse */}
-                <div className="register-link">
-                    {/* Usamos <Link> con la ruta que definimos en App.js */}
-                    <Link to="/registro">Regístrate Aquí</Link>
-                </div>
+const handleGoBack = () => {
+  navigate('/');
+};
 
-            </div>
+  return (
+    <div className="login-screen-container">
+
+      <header className="top">
+        <Title />
+      </header>
+
+      <div className="login-logo-container">
+        <Logo />
+      </div>
+
+      <div className="LoginCard">
+
+        <div className="back" onClick={handleGoBack}>
+          <i className="fa-solid fa-chevron-left"></i>
         </div>
-    );
+
+        <h2 className="title">Inicio de Sesión</h2>
+
+        <form className="form" onSubmit={handleSubmit}>
+
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+
+          <label>Contraseña</label>
+          <input
+            type="password"
+            name="password_hash"
+            value={formData.password_hash}
+            onChange={handleChange}
+            required
+          />
+
+          {error && <p className="error">{error}</p>}
+
+          <button type="submit" className="login-btn" disabled={loading}>
+            {loading ? 'Verificando...' : 'INICIAR SESIÓN'}
+          </button>
+
+        </form>
+
+        <div className="register-link">
+          <Link to="/registro">Regístrate aquí</Link>
+        </div>
+
+      </div>
+    </div>
+  );
 };
 
 export default LoginPage;

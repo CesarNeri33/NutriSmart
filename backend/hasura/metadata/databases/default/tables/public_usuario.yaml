@@ -1,0 +1,42 @@
+table:
+  name: usuario
+  schema: public
+array_relationships:
+  - name: lista_compras
+    using:
+      foreign_key_constraint_on:
+        column: usuario_id
+        table:
+          name: lista_compra
+          schema: public
+  - name: usuario_padecimientos
+    using:
+      foreign_key_constraint_on:
+        column: usuario_id
+        table:
+          name: usuario_padecimiento
+          schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+        - email
+        - fecha_registro
+        - foto_perfil
+        - nombre
+        - password_hash
+        - usuario_id
+    comment: ""
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - email
+        - nombre
+        - usuario_id
+        - foto_perfil
+        - password_hash
+        - fecha_registro
+      filter: {}
+    comment: ""

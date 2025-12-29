@@ -1,0 +1,91 @@
+.product-page-container {
+  width: 85%;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+
+.back-button {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+
+  cursor: pointer;
+  z-index: 2;
+}
+
+.back-button i {
+  font-size: 18px;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+/* Tarjeta cupón */
+.product-coupon-card {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 24px;
+
+  background: #fffea6;
+  border-radius: 24px;
+  padding: 24px;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Imagen */
+.coupon-image {
+  position: relative;   /* 👈 CLAVE */
+  width: 300px;
+  aspect-ratio: 1 / 1;
+  border-radius: 18px;
+  background: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coupon-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Contenido */
+.coupon-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-name {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.product-quantity {
+  margin: 0;
+  font-size: 18px;
+  color: #555;
+}
+
+/* Tabla nutrimental */
+.nutrient-table {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}

@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Title from '../Componentes/Title'; // ⬅️ Reutilizamos el componente
-import Logo from '../Componentes/Logo'; // ⬅️ Reutilizamos el componente
 import Header from '../Componentes/Header';
 import './StartPage.css';
 
 const StartPage = () => {
     const navigate = useNavigate();
+
+    // Handler para cerrar sesion
+    const handleLogout = () => {
+        console.log('🚪 Cerrando sesión...');
+        localStorage.removeItem('usuario');
+        navigate('/iniciar-sesion');
+    };
 
     // Handler para navegar a la página de Buscador
     const handleSearchClick = () => {
@@ -41,32 +46,24 @@ const StartPage = () => {
             {/* Contenedor de Botones de Navegación */}
             <div className="botones">
                 
-                <button 
-                    className="btn-buscador"
-                    onClick={handleSearchClick}
-                >
+                <button className="btn-buscador" onClick={handleSearchClick}>
                     Buscador <i className="fa-solid fa-magnifying-glass"></i>
                 </button>
                 
-                <button 
-                    className="btn-listas"
-                    onClick={handleListsClick}
-                >
+                <button className="btn-listas" onClick={handleListsClick}>
                     Listas <i className="fa-solid fa-list"></i>
                 </button>
                 
-                <button 
-                    className="btn-ayuda"
-                    onClick={handleHelpClick}
-                >
+                <button className="btn-ayuda" onClick={handleHelpClick}>
                     Ayuda <i className="fa-regular fa-circle-question"></i>
                 </button>
 
-                <button 
-                    className="btn-padecimientos"
-                    onClick={handleAilmentsClick}
-                >
+                <button className="btn-padecimientos" onClick={handleAilmentsClick}>
                     Padecimientos <i class="fa-solid fa-heart-pulse"></i>
+                </button>
+
+                <button className="btn-cerrar-sesion" onClick={handleLogout}>
+                    Cerrar sesión <i class="fa-solid fa-door-open"></i>
                 </button>
                 
             </div>
