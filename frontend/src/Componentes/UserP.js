@@ -32,7 +32,7 @@ const UserP = () => {
         <div>
             {usuario.foto_perfil ? (
             <img
-                src={`http://localhost:4000${usuario.foto_perfil}`}
+                src={`http://191.96.31.39:4000${usuario.foto_perfil}`}
                 alt="Foto de perfil"
                 width="110"
                 className="avatar-imagen-header"

@@ -26,7 +26,7 @@ const ProfilePage = () => {
     const uploadImage = async (file) => {
     const data = new FormData();
     data.append('file', file);
-    const res = await fetch('http://localhost:4000/upload', {
+    const res = await fetch('http://191.96.31.39:4000/upload', {
         method: 'POST',
         body: data,
     });
@@ -152,7 +152,7 @@ const ProfilePage = () => {
                     <div className="avatar-perfil">
                         {usuario.foto_perfil ? (
                             <img
-                                src={`http://localhost:4000${usuario.foto_perfil}`}
+                                src={`http://191.96.31.39:4000${usuario.foto_perfil}`}
                                 alt="Foto de perfil"
                                 width="110"
                                 height="110"

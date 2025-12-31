@@ -36,7 +36,7 @@ const [loginUsuario, { loading }] = useLazyQuery(LOGIN_USUARIO, {
 
     // 🔀 Redirección por rol
     if (usuario.rol === 'admin') {
-      window.location.href = 'http://localhost:8080/console';
+      window.location.href = 'http://191.96.31.39:8080/console';
     } else {
       navigate('/inicio');
     }

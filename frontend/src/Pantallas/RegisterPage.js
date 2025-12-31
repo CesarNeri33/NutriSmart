@@ -63,7 +63,7 @@ const RegisterPage = () => {
     const data = new FormData();
     data.append('file', file);
 
-    const res = await fetch('http://localhost:4000/upload', {
+    const res = await fetch('http://191.96.31.39:4000/upload', {
       method: 'POST',
       body: data,
     });
