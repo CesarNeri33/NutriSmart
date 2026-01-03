@@ -18,12 +18,24 @@ export const LOGIN_USUARIO = gql`
   }
 `;
 
-export const GET_PADECIMIENTOS = gql`
-  query GetPadecimientos {
-    padecimiento(order_by: { nombre: asc }) {
-      padecimiento_id
+export const GET_USUARIOS = gql`
+  query GetUsuarios {
+    usuario(order_by: { usuario_id: asc }) {
+      usuario_id
       nombre
-      descripcion
+      email
+      password_hash
+      foto_perfil
+      rol
+      fecha_registro
+
+      usuario_padecimientos {
+        padecimiento {
+          padecimiento_id
+          nombre
+          descripcion
+        }
+      }
     }
   }
 `;
@@ -38,6 +50,16 @@ export const GET_USUARIO_PADECIMIENTOS = gql`
         nombre
         descripcion
       }
+    }
+  }
+`;
+
+export const GET_PADECIMIENTOS = gql`
+  query GetPadecimientos {
+    padecimiento(order_by: { nombre: asc }) {
+      padecimiento_id
+      nombre
+      descripcion
     }
   }
 `;

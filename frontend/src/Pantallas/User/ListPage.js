@@ -1,11 +1,11 @@
 // src/Pantallas/ListPage.js
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_LISTAS_USUARIO, INSERT_LISTA, DELETE_LISTA, UPDATE_LISTA } from '../graphql/listas';
+import { GET_LISTAS_USUARIO, INSERT_LISTA, DELETE_LISTA, UPDATE_LISTA } from '../../graphql/listas';
 import { useNavigate } from 'react-router-dom';
-import ListItem from '../Componentes/ListItem';
-import Header from '../Componentes/Header';
-import ModalCard from '../Componentes/ModalCard';
+import ListItem from '../../Componentes/ListItem';
+import Header from '../../Componentes/Header';
+import ModalCard from '../../Componentes/ModalCard';
 import './ListPage.css';
 
 const ListPage = () => {

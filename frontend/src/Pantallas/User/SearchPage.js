@@ -4,11 +4,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-import Header from '../Componentes/Header';
-import RecentItem from '../Componentes/RecentItem';
-import { GET_PRODUCTOS } from '../graphql/products';
-import { evaluateProduct } from '../rules/nutritionRules';
-import { mapProductToSemaforo, mapProductValues } from '../rules/mapToSemaforo';
+import Header from '../../Componentes/Header';
+import RecentItem from '../../Componentes/RecentItem';
+import { GET_PRODUCTOS } from '../../graphql/products';
+import { evaluateProduct } from '../../rules/nutritionRules';
+import { mapProductToSemaforo, mapProductValues } from '../../rules/mapToSemaforo';
 
 import './SearchPage.css';
 

@@ -1,20 +1,20 @@
-// src/Pantallas/ProductPage.js
+// src/Pantallas/User/ProductPage.js
 import React from 'react';
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-import Header from '../Componentes/Header';
-import { GET_PRODUCTO_BY_ID } from '../graphql/products';
-import { evaluateProduct } from '../rules/nutritionRules';
-import NutrientRow from '../Componentes/NutrientRow';
+import Header from '../../Componentes/Header';
+import { GET_PRODUCTO_BY_ID } from '../../graphql/products';
+import { evaluateProduct } from '../../rules/nutritionRules';
+import NutrientRow from '../../Componentes/NutrientRow';
 
-import { GET_HELP_WITH_NUTRIENTS, GET_USUARIO_PADECIMIENTOS, GET_PADECIMIENTO_NUTRIENTES } from '../graphql/helpQueries';
+import { GET_HELP_WITH_NUTRIENTS, GET_USUARIO_PADECIMIENTOS, GET_PADECIMIENTO_NUTRIENTES } from '../../graphql/helpQueries';
 
-import { buildHelpContext } from '../rules/helpContextBuilder';
-import { resolveHelps } from '../rules/helpResolver';
+import { buildHelpContext } from '../../rules/helpContextBuilder';
+import { resolveHelps } from '../../rules/helpResolver';
 
-import HelpCard from '../Componentes/HelpCard';
+import HelpCard from '../../Componentes/HelpCard';
 
 import './ProductPage.css';
 

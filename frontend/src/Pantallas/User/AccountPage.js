@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import './AccountPage.css';
 import { useNavigate } from 'react-router-dom';
-import Title from '../Componentes/Title';
-import Logo from '../Componentes/Logo';
-import ModalCard from '../Componentes/ModalCard';
+import Title from '../../Componentes/Title';
+import Logo from '../../Componentes/Logo';
+import ModalCard from '../../Componentes/ModalCard';
 import { useMutation } from '@apollo/client';
-import { UPDATE_FOTO_PERFIL, UPDATE_USUARIO } from '../graphql/mutations';
+import { UPDATE_FOTO_PERFIL, UPDATE_USUARIO } from '../../graphql/mutations';
 
 const ProfilePage = () => {
     const usuario = JSON.parse(localStorage.getItem('usuario'));

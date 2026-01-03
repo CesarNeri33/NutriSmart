@@ -35,12 +35,20 @@ const [loginUsuario, { loading }] = useLazyQuery(LOGIN_USUARIO, {
     localStorage.setItem('usuario', JSON.stringify(usuario));
 
     // 🔀 Redirección por rol
-    if (usuario.rol === 'admin') {
-      window.location.href = 'http://191.96.31.39:8080/console';
-    } else {
-      navigate('/inicio');
+    switch (usuario.rol) {
+      case 'admin':
+        navigate('/ad-inicio');
+        break;
+
+      case 'dev':
+        window.location.href = 'http://191.96.31.39:8080/console';
+        break;
+
+      case 'usuario':
+      default:
+        navigate('/inicio');
+        break;
     }
-    
   },
   onError: (error) => {
     console.error("🔥 Error al ejecutar login:", error);

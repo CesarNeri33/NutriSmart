@@ -1,17 +1,17 @@
-// src/Pantallas/AilmentsPage.js 
+// src/Pantallas/User/AilmentsPage.js 
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import Header from '../Componentes/Header';
+import Header from '../../Componentes/Header';
 import './AilmentsPage.css';
 import {
   GET_PADECIMIENTOS,
   GET_USUARIO_PADECIMIENTOS
-} from '../graphql/query';
+} from '../../graphql/query';
 import {
     INSERT_USUARIO_PADECIMIENTO, 
     DELETE_USUARIO_PADECIMIENTO
-} from '../graphql/mutations';
+} from '../../graphql/mutations';
 
 const AilmentsPage = () => {
     const navigate = useNavigate();

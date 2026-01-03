@@ -21,6 +21,33 @@ export const REGISTER_USUARIO = gql`
   }
 `;
 
+export const AD_UPDATE_USUARIO = gql`
+  mutation AD_UPDATE_USUARIO(
+    $usuario_id: Int!
+    $changes: usuario_set_input!
+  ) {
+    update_usuario_by_pk(
+      pk_columns: { usuario_id: $usuario_id }
+      _set: $changes
+    ) {
+      usuario_id
+      nombre
+      email
+      rol
+      foto_perfil
+      fecha_registro
+    }
+  }
+`;
+
+export const AD_DELETE_USUARIO = gql`
+mutation DeleteUsuario($usuario_id: Int!) {
+  delete_usuario_by_pk(usuario_id: $usuario_id) {
+    usuario_id
+  }
+}
+`;
+
 export const UPDATE_USUARIO = gql`
   mutation UpdateUsuario(
     $usuario_id: Int!
@@ -49,6 +76,21 @@ export const UPDATE_FOTO_PERFIL = gql`
   mutation UpdateFotoPerfil(
     $usuario_id: Int!
     $foto_perfil: String!
+  ) {
+    update_usuario_by_pk(
+      pk_columns: { usuario_id: $usuario_id }
+      _set: { foto_perfil: $foto_perfil }
+    ) {
+      usuario_id
+      foto_perfil
+    }
+  }
+`;
+
+export const AD_UPDATE_FOTO_PERFIL = gql`
+  mutation UpdateFotoPerfil(
+    $usuario_id: Int!
+    $foto_perfil: String
   ) {
     update_usuario_by_pk(
       pk_columns: { usuario_id: $usuario_id }

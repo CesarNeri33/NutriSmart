@@ -3,10 +3,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 
 import './ProductListPage.css';
-import Header from '../Componentes/Header';
-import RecentListItem from '../Componentes/RecentListItem';
+import Header from '../../Componentes/Header';
+import RecentListItem from '../../Componentes/RecentListItem';
 
-import { GET_PRODUCTOS } from '../graphql/products';
+import { GET_PRODUCTOS } from '../../graphql/products';
 import {
   GET_LISTA_BY_ID,
   GET_PRODUCTOS_DE_LISTA,
@@ -14,13 +14,13 @@ import {
   TOGGLE_PRODUCTO_COMPRADO,
   UPDATE_UNIDAD_PRODUCTO,
   DELETE_PRODUCTO_DE_LISTA,
-} from '../graphql/listas';
+} from '../../graphql/listas';
 
-import { evaluateProduct } from '../rules/nutritionRules';
+import { evaluateProduct } from '../../rules/nutritionRules';
 import {
   mapProductToSemaforo,
   mapProductValues,
-} from '../rules/mapToSemaforo';
+} from '../../rules/mapToSemaforo';
 
 import { useParams, useNavigate } from 'react-router-dom';
 

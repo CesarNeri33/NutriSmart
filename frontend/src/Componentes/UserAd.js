@@ -1,4 +1,4 @@
-// src/Componentes/UserP.js
+// src/Componentes/UserAd.js
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,13 +8,22 @@ const UserP = () => {
   const usuario = JSON.parse(localStorage.getItem('usuario'));
 
   useEffect(() => {
+    // 1️⃣ No hay sesión → login
     if (!usuario) {
-      console.log('⛔ Sin sesión, redirigiendo...');
+      console.log('⛔ Sin sesión, redirigiendo a login...');
       navigate('/iniciar-sesion');
+      return;
+    }
+
+    // 2️⃣ Hay sesión pero NO es admin ni dev → inicio
+    if (usuario.rol !== 'admin' && usuario.rol !== 'dev') {
+      console.log('⛔ Rol no autorizado, redirigiendo a inicio...');
+      navigate('/inicio');
     }
   }, [usuario, navigate]);
 
-  if (!usuario) {
+  // Evita render mientras redirige
+  if (!usuario || (usuario.rol !== 'admin' && usuario.rol !== 'dev')) {
     return null;
   }
 

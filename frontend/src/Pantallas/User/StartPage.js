@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../Componentes/Header';
+import Header from '../../Componentes/Header';
 import './StartPage.css';
 
 const StartPage = () => {

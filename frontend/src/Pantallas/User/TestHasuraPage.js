@@ -1,8 +1,8 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { TEST_USUARIOS_TODOS } from "../graphql/testQuery";
-import { TEST_USUARIO_POR_EMAIL } from "../graphql/testQuery";
-import { TEST_USUARIO_LOGIN } from "../graphql/testQuery";
+import { TEST_USUARIOS_TODOS } from "../../graphql/testQuery";
+import { TEST_USUARIO_POR_EMAIL } from "../../graphql/testQuery";
+import { TEST_USUARIO_LOGIN } from "../../graphql/testQuery";
 
 const TestHasuraPage = () => {
   // const { data, loading, error } = useQuery(TEST_USUARIOS_TODOS);

@@ -18,7 +18,6 @@ const sanitizeFilename = (filename) => {
 };
 
 // Configuración de multer
-
 const storage = multer.diskStorage({
   destination: 'upload/',
   filename: (req, file, cb) => {
@@ -31,7 +30,6 @@ const storage = multer.diskStorage({
     cb(null, finalName);
   },
 });
-
 const upload = multer({
   storage,
   fileFilter: (req, file, cb) => {

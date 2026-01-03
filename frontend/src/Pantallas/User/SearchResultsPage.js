@@ -4,14 +4,14 @@ import React, { useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-import Header from '../Componentes/Header';
-import RecentItem from '../Componentes/RecentItem';
-import { GET_PRODUCTOS } from '../graphql/products';
-import { evaluateProduct } from '../rules/nutritionRules';
+import Header from '../../Componentes/Header';
+import RecentItem from '../../Componentes/RecentItem';
+import { GET_PRODUCTOS } from '../../graphql/products';
+import { evaluateProduct } from '../../rules/nutritionRules';
 import {
   mapProductToSemaforo,
   mapProductValues,
-} from '../rules/mapToSemaforo';
+} from '../../rules/mapToSemaforo';
 
 import './SearchResultsPage.css';
 

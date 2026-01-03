@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
-import Header from '../Componentes/Header';
-import HelpCard from '../Componentes/HelpCard';
-import { GET_HELP } from '../graphql/query';
+import Header from '../../Componentes/Header';
+import HelpCard from '../../Componentes/HelpCard';
+import { GET_HELP } from '../../graphql/query';
 
 import './HelpPage.css';
 

@@ -2,13 +2,13 @@
 
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { GET_PRODUCTOS } from '../graphql/products';
-import RecentItem from '../Componentes/RecentItem';
-import { evaluateProduct } from '../rules/nutritionRules';
+import { GET_PRODUCTOS } from '../../graphql/products';
+import RecentItem from '../../Componentes/RecentItem';
+import { evaluateProduct } from '../../rules/nutritionRules';
 import {
   mapProductToSemaforo,
   mapProductValues,
-} from '../rules/mapToSemaforo';
+} from '../../rules/mapToSemaforo';
 
 const ProductsTestPage = () => {
   const { data, loading, error } = useQuery(GET_PRODUCTOS);

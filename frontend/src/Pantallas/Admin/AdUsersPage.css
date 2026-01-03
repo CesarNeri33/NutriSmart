@@ -1,0 +1,204 @@
+/* src/Pantallas/Admin/AdUserPage.css */
+.users-admin-container {
+  width: 85%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.users-search {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.users-search input,
+.users-search select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ffffff;
+  background: #ffffff;
+}
+
+.user-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.ad-user-coupon-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  background: #eeed88;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Imagen */
+.user-image {
+  position: relative;
+  width: 85%;
+  aspect-ratio: 1 / 1;
+  border-radius: 18px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.user-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.fake-photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  color: #aaa;
+}
+
+.user-image .image-actions {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+}
+
+.image-actions button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.6);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.user-content h2 {
+  font-size: 22px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.user-content input,
+.user-content select {
+  font-size: 24px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #ffffff;
+  background: #ffffff; 
+}
+
+.user-row label {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.user-row {
+  font-size: 34px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 5px;
+}
+
+.user-row.small {
+  font-size: 14px;
+  color: #555;
+}
+
+.toggle-pass {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.user-padecimientos {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.padecimiento-chip {
+  background: #cacaca;
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-size: 13px;
+}
+
+.padecimiento-chip.empty {
+  background: #e0e0e0;
+  color: #666;
+  font-style: italic;
+}
+
+.user-actions {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 10px;
+}
+
+.user-actions .btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.user-actions .btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.padecimiento-chip {
+  position: relative;
+  padding-right: 22px;
+}
+
+.padecimiento-chip-delete {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: none;
+  border: none;
+  color: #ff4444;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.user-padecimientos-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.padecimiento-add-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #4caf50;
+  background: white;
+  color: #4caf50;
+  font-size: 18px;
+  cursor: pointer;
+}
