@@ -1,0 +1,327 @@
+/* src/Pantallas/Admin/AdProductsPage.css */
+/* --- RESET Y BASES --- */
+.manage-products-container * {
+  box-sizing: border-box;
+}
+
+.manage-products-container {
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 50px;
+}
+
+/* --- BARRA SUPERIOR --- */
+.manage-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.manage-back-button, 
+.manage-add-button {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.manage-back-button {
+  background: #eee;
+  border-radius: 50%;
+  color: #333;
+}
+
+.manage-add-button {
+  background-color: #333;
+  color: white;
+  border-radius: 12px;
+  font-size: 20px;
+}
+
+.manage-add-button:hover {
+  background-color: #000;
+  transform: scale(1.05);
+}
+
+.manage-search-container {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.manage-search-container input {
+  width: 100%;
+  padding: 12px 12px 12px 45px;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  color: #888;
+  pointer-events: none;
+}
+
+/* --- TARJETAS DE PRODUCTO (LISTA) --- */
+.manage-product-card {
+  display: flex;
+  gap: 20px;
+  background: #fffea6;
+  border-radius: 24px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.manage-card-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 120px;
+}
+
+.manage-image-box {
+  width: 110px;
+  height: 110px;
+  background: #fff;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.manage-image-box img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+}
+
+.image-edit-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.img-btn-black {
+  height: 34px;
+  padding: 0 10px;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.manage-id-tag {
+  font-weight: bold;
+  font-size: 13px;
+  background: rgba(0,0,0,0.07);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* --- FORMULARIOS (TARJETA Y MODAL) --- */
+.manage-card-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.manage-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.manage-input-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.manage-input-group.full {
+  flex: 2;
+}
+
+.manage-input-group label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  color: #666;
+}
+
+.manage-input-group input, 
+.manage-input-group select {
+  padding: 10px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  font-size: 14px;
+  background: white;
+  outline: none;
+}
+
+.manage-input-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 1em;
+}
+
+.manage-nutrients-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  background: rgba(255,255,255,0.4);
+  padding: 15px;
+  border-radius: 15px;
+}
+
+/* --- MODAL --- */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  padding: 20px;
+}
+
+.modal-content {
+  background: #fff;
+  width: 100%;
+  max-width: 650px;
+  max-height: 90vh;
+  border-radius: 28px;
+  overflow-y: auto;
+  padding: 30px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.close-modal-btn {
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #999;
+}
+
+.modal-photo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.modal-body .manage-row {
+  margin-bottom: 15px;
+}
+
+.modal-footer {
+  margin-top: 25px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.btn-confirm {
+  background: #28a745;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 12px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-cancel {
+  background: #eee;
+  color: #555;
+  padding: 12px 25px;
+  border-radius: 12px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-confirm:hover, .btn-cancel:hover {
+  opacity: 0.8;
+}
+
+/* --- ACCIONES DERECHA (LISTA) --- */
+.manage-card-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.action-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.save-btn { background: #28a745; color: white; }
+.delete-btn { background: #dc3545; color: white; }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 800px) {
+  .manage-product-card {
+    flex-direction: column;
+  }
+  .manage-card-actions {
+    flex-direction: row;
+  }
+  .manage-nutrients-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .manage-row {
+    flex-direction: column;
+  }
+}

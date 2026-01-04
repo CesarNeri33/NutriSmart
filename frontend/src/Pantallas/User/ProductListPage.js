@@ -1,4 +1,4 @@
-// src/Pantallas/ProductListPage.js
+// src/Pantallas/User/ProductListPage.js
 import React, { useState, useRef, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 

@@ -1,3 +1,4 @@
+// src/components/NutrientRow.js
 import React from 'react';
 import './NutrientRow.css';
 

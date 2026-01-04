@@ -75,6 +75,14 @@ const ProductPage = () => {
 
   const evaluation = evaluateProduct(producto);
 
+    // URL del servidor (idealmente esto iría en un archivo de config centralizado)
+  const SERVER_URL = 'http://191.96.31.39:4000';
+
+  // Lógica para procesar la imagen
+  const fotoUrl = producto.foto_producto?.startsWith('/upload') 
+    ? `${SERVER_URL}${producto.foto_producto}` 
+    : producto.foto_producto; // En caso de que sea una URL externa o vieja
+
 let ayudasFinales = [];
 
 //console.log('HELP DATA RAW:', helpData);
@@ -105,13 +113,13 @@ if (!helpLoading && padecimientoNutrienteData && usuarioPadecimientosData) {
 
         {/* Imagen */}
         <div className="coupon-image">
-            {/* Flecha */}
             <button className="back-button" onClick={() => navigate(-1)}>
                 <i className="fa-solid fa-chevron-left"></i>
             </button>
 
             {producto.foto_producto ? (
-                <img src={producto.foto_producto} alt={producto.nombre} />
+                /* Usamos fotoUrl en lugar de producto.foto_producto directamente */
+                <img src={fotoUrl} alt={producto.nombre} />
             ) : (
                 <i className="fa-solid fa-bottle-water icono-producto"></i>
             )}

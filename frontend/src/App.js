@@ -5,6 +5,7 @@ import './App.css';
 import WelcomePage from './Pantallas/WelcomePage'; 
 import LoginPage from './Pantallas/LoginPage';
 import RegisterPage from './Pantallas/RegisterPage';
+
 import SearchPage from './Pantallas/User/SearchPage';
 import AccountPage from './Pantallas/User/AccountPage';
 import StartPage from './Pantallas/User/StartPage';
@@ -16,10 +17,11 @@ import TestQuery from './Pantallas/User/TestHasuraPage';
 import ProductsTestPage from './Pantallas/User/ProductsTestPage';
 import SearchResultsPage from './Pantallas/User/SearchResultsPage';
 import ProductPage from './Pantallas/User/ProductPage';
+import BarCodeScanner from './Pantallas/User/BarCodeScanner';
 
 import AdminStartPage from './Pantallas/Admin/AdStartPage';
 import AdminUsersPage from './Pantallas/Admin/AdUsersPage';
-
+import AdminProductsPage from './Pantallas/Admin/AdProductsPage';
 
 import ProtectedRoute from './auth/ProtectedRoute';
 
@@ -42,10 +44,12 @@ function App() {
         <Route path="/padecimientos" element={<AilmentsPage />} />
         <Route path="/listas/:listaId" element={<ProductListPage />} />
         <Route path="/producto/:id" element={<ProductPage />} />
+        <Route path="/escaner" element={<BarCodeScanner />} />
 
         {/* Rutas del Administrador */}
         <Route path="/ad-inicio" element={<AdminStartPage />} />
         <Route path="/ad-usuarios" element={<AdminUsersPage />} />
+        <Route path="/ad-productos" element={<AdminProductsPage />} />
 
         {/* Ruta de Prueba */}
         <Route path="/test" element={<TestQuery />} />

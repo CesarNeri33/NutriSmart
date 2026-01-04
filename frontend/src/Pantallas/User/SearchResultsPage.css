@@ -1,67 +1,58 @@
-/* src/screens/SearchResultsPage.css */
+/* src/Pantallas/User/SearchResultsPage.css */
 
-/* 🔎 Caja búsqueda */
-.search-results-box {
-  margin: 20px auto;
-  max-width: 400px;
+.search-page-container {
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 50px;
 }
 
-.search-results-box input {
-  width: 100%;
-  padding: 10px 14px;
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  font-size: 15px;
-}
-
-/* 📌 Secciones */
-.results-section,
-.all-products-section {
-  margin-top: 30px;
-}
-
-/* 🧱 Grid 3 columnas */
-.results-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  margin-top: 20px;
-}
-
-/* 📄 Texto vacío */
-.empty {
-  margin-top: 20px;
-  color: #777;
-}
-
-/* ⏮ Paginación */
-.pagination {
-  margin-top: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-}
-
-.pagination button {
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  background: #d8f6be;
-  font-weight: bold;
-}
-
-.pagination button:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-
-.top {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 40px;
+.titleSerch {
+    text-align: center;
     font-size: 24px;
-    font-weight: bold;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;
+    margin-bottom: 15px;
+}
+
+/* 🧱 Grid Responsivo */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas en desktop */
+    gap: 18px;
+    margin-top: 30px;
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+    .results-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Móviles */
+@media (max-width: 600px) {
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+    .filters-container {
+        flex-direction: column;
+    }
+}
+
+.status-msg, .empty-msg {
+    text-align: center;
+    margin-top: 40px;
+    color: #666;
+    font-size: 18px;
+    grid-column: 1 / -1; /* Ocupa todo el ancho en el grid */
+}
+
+.filter-select {
+    cursor: pointer;
+    background-color: white;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.filter-select:focus {
+    border-color: #28a745;
 }

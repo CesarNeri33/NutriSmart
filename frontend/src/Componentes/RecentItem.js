@@ -6,6 +6,23 @@ import './RecentItem.css';
 const RecentItem = ({ id, nombre, cantidad, medida, imagen, niveles, valores, onSelect }) => {
   const navigate = useNavigate();
   const [imgError, setImgError] = useState(false);
+  const SERVER_URL = 'http://191.96.31.39:4000';
+
+  // Lógica mejorada:
+  let rutaImagenFinal = imagen;
+
+  if (imagen) {
+    // Caso 1: Ya tiene la ruta nueva (/upload/products/...)
+    if (imagen.startsWith('/upload')) {
+      rutaImagenFinal = `${SERVER_URL}${imagen}`;
+    } 
+    // Caso 2: Tiene la ruta vieja (/products/...)
+    else if (imagen.startsWith('/products')) {
+      // Reemplazamos /products por /upload/products
+      const nuevaRuta = imagen.replace('/products', '/upload/products');
+      rutaImagenFinal = `${SERVER_URL}${nuevaRuta}`;
+    }
+  }
 
   const handleProductClick = () => {
     if (onSelect) onSelect();
@@ -17,11 +34,11 @@ const RecentItem = ({ id, nombre, cantidad, medida, imagen, niveles, valores, on
   return (
     <div className="recent-item-card" onClick={handleProductClick}>
       
-      {/* Columna izquierda */}
+      {/* Columna izquierda: Imagen */}
       <div className="recent-item-image">
         {mostrarImagen ? (
           <img
-            src={imagen}
+            src={rutaImagenFinal}
             alt={nombre}
             onError={() => setImgError(true)}
           />
@@ -30,7 +47,7 @@ const RecentItem = ({ id, nombre, cantidad, medida, imagen, niveles, valores, on
         )}
       </div>
 
-      {/* Columna derecha */}
+      {/* Columna derecha: Información */}
       <div className="recent-item-content">
         <p className="recent-item-name">{nombre} {cantidad}{medida}</p>
         <div className="recent-item-bars">

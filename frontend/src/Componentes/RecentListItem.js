@@ -5,33 +5,44 @@ import './RecentListItem.css';
 const RecentListItem = ({
   nombre,
   cantidad,
-  unidad,          // unidades (BD, solo en list)
+  unidad,
   medida,
   imagen,
   niveles,
   valores,
-
   comprado = false,
-
-  mode = 'list',     // 'list' | 'suggestion'
-
+  mode = 'list',
   onToggleComprado,
   onAddProducto,
   onCantidadChange,
   onDelete,
 }) => {
   const [imgError, setImgError] = useState(false);
+  
+  // URL de tu servidor backend
+  const SERVER_URL = 'http://191.96.31.39:4000';
+
+  // Lógica para construir la URL de la imagen
+  let rutaImagenFinal = imagen;
+  if (imagen) {
+    if (imagen.startsWith('/upload')) {
+      rutaImagenFinal = `${SERVER_URL}${imagen}`;
+    } else if (imagen.startsWith('/products')) {
+      // Por si queda algún rastro de la ruta vieja en la DB
+      rutaImagenFinal = `${SERVER_URL}${imagen.replace('/products', '/upload/products')}`;
+    }
+  }
 
   const mostrarImagen = imagen && !imgError;
 
-    const handleClick = () => {
-        if (mode === 'list') {
-            onToggleComprado?.();
-        }
-        if (mode === 'suggestion') {
-            onAddProducto?.();
-        }
-    };
+  const handleClick = () => {
+    if (mode === 'list') {
+      onToggleComprado?.();
+    }
+    if (mode === 'suggestion') {
+      onAddProducto?.();
+    }
+  };
 
   return (
     <div
@@ -42,7 +53,7 @@ const RecentListItem = ({
       <div className="list-item-image">
         {mostrarImagen ? (
           <img
-            src={imagen}
+            src={rutaImagenFinal} // <--- Usamos la ruta procesada
             alt={nombre}
             onError={() => setImgError(true)}
           />
@@ -51,12 +62,11 @@ const RecentListItem = ({
         )}
       </div>
 
-      {/* Contenido */}
+      {/* ... resto del código (contenido y cantidad) se mantiene exactamente igual */}
       <div className="list-item-content">
         <p className="list-item-name">
           {nombre} {cantidad}{medida}
         </p>
-
         <div className="list-item-bars">
           <div className={`list-bar ${niveles.grasas}`}>
             Grasas {valores.grasas} g
@@ -70,33 +80,30 @@ const RecentListItem = ({
         </div>
       </div>
 
-      {/* Cantidad */}
       {mode === 'list' && (
         <div
-            className="list-item-cantidad"
-            onClick={(e) => e.stopPropagation()}
+          className="list-item-cantidad"
+          onClick={(e) => e.stopPropagation()}
         >
-            <button
+          <button
             onClick={() => onCantidadChange(unidad - 1)}
             disabled={unidad <= 1}
-            >
+          >
             −
-            </button>
-
-            <span>{unidad}</span>
-
-            <button onClick={() => onCantidadChange(unidad + 1)}>
-            +
-            </button>
-            <button
-                className="list-item-delete"
-                onClick={(e) => {
-                e.stopPropagation(); // evitar marcar como comprado
-                onDelete?.();
-                }}
-            >🗑️</button>
+          </button>
+          <span>{unidad}</span>
+          <button onClick={() => onCantidadChange(unidad + 1)}>+</button>
+          <button
+            className="list-item-delete"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete?.();
+            }}
+          >
+            🗑️
+          </button>
         </div>
-        )}
+      )}
     </div>
   );
 };
