@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../Componentes/Header';
+import AdHeader from '../../Componentes/AdHeader';
 import './AdStartPage.css';
 
 const StartPage = () => {
@@ -30,7 +30,7 @@ const StartPage = () => {
 
     // Handler para navegar a la página de Tips del Administrador
     const handleAdmHelpClick = () => {
-        navigate('/ad-ayuda');
+        navigate('/ad-ayudas');
     };
     
     // Handler para navegar a la página de padecimientos del Administrador
@@ -42,7 +42,7 @@ const StartPage = () => {
         <div className="start-page-container">
             
             {/* Encabezado Superior con el Nombre de la Marca y el Logo */}
-            <Header />
+            <AdHeader />
 
             <h2 className="mensaje-bienvenido">Bienvenido</h2>
 

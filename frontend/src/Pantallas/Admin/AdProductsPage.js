@@ -3,7 +3,7 @@ import React, { useState, useMemo, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
 
-import Header from '../../Componentes/Header';
+import AdHeader from '../../Componentes/AdHeader';
 import { GET_ALL_PRODUCTOS, UPDATE_PRODUCT_PHOTO, UPDATE_PRODUCTO, DELETE_PRODUCTO, INSERT_PRODUCTO} from '../../graphql/products';
 import './AdProductsPage.css';
 
@@ -160,7 +160,7 @@ const handleCreateProduct = async (e) => {
 
   return (
     <div className="manage-products-container">
-      <Header />
+      <AdHeader />
 
       <input 
         type="file" 

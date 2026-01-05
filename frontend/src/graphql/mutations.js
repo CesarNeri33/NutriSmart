@@ -134,3 +134,103 @@ export const DELETE_USUARIO_PADECIMIENTO = gql`
     }
   }
 `;
+
+//Cosillas del moha
+
+export const INSERT_AYUDA = gql`
+  mutation InsertAyuda(
+    $titulo: String!
+    $descripcion: String!
+    $tipo: String
+  ) {
+    insert_ayuda_one(object: {
+      titulo: $titulo
+      descripcion: $descripcion
+      tipo: $tipo
+    }) {
+      ayuda_id
+    }
+  }
+`;
+
+
+export const DELETE_AYUDA = gql`
+  mutation DeleteAyuda($ayuda_id: Int!) {
+    delete_ayuda_by_pk(ayuda_id: $ayuda_id) {
+      ayuda_id
+    }
+  }
+`;
+
+export const UPDATE_AYUDA = gql`
+  mutation UpdateAyuda(
+    $ayuda_id: Int!
+    $titulo: String!
+    $descripcion: String!
+    $tipo: String!  # <--- Agregamos esta variable
+  ) {
+    update_ayuda_by_pk(
+      pk_columns: { ayuda_id: $ayuda_id }
+      _set: {
+        titulo: $titulo
+        descripcion: $descripcion
+        tipo: $tipo    # <--- Actualizamos el campo
+      }
+    ) {
+      ayuda_id
+      tipo
+    }
+  }
+`;
+
+export const INSERT_AYUDA_NUTRIENTE = gql`
+  mutation InsertAyudaNutriente(
+    $ayuda_id: Int!
+    $nutriente_id: Int!
+  ) {
+    insert_ayuda_nutriente_one(object: {
+      ayuda_id: $ayuda_id
+      nutriente_id: $nutriente_id
+    }) {
+      # Si no hay ID, pedimos los campos que componen la PK
+      ayuda_id
+      nutriente_id
+    }
+  }
+`;
+
+export const INSERT_AYUDA_PADECIMIENTO = gql`
+  mutation InsertAyudaPadecimiento(
+    $ayuda_id: Int!
+    $padecimiento_id: Int!
+  ) {
+    insert_padecimiento_ayuda_one(object: {
+      ayuda_id: $ayuda_id
+      padecimiento_id: $padecimiento_id
+    }) {
+      id # Aquí sí lo dejamos porque dijiste que esta tabla sí tiene ID
+    }
+  }
+`;
+
+// Query para cargar la ayuda específica al editar
+export const GET_AYUDA_DETALLE = gql`
+  query GetAyudaDetalle($id: Int!) {
+    ayuda_by_pk(ayuda_id: $id) {
+      ayuda_id
+      titulo
+      descripcion
+      tipo
+      ayuda_nutrientes { nutriente_id }
+      padecimiento_ayudas { padecimiento_id }
+    }
+  }
+`;
+
+// Mutación para limpiar relaciones (se usa antes de re-insertar)
+export const DELETE_RELACIONES_AYUDA = gql`
+  mutation DeleteRelacionesAyuda($ayuda_id: Int!) {
+    delete_ayuda_nutriente(where: {ayuda_id: {_eq: $ayuda_id}}) { affected_rows }
+    delete_padecimiento_ayuda(where: {ayuda_id: {_eq: $ayuda_id}}) { affected_rows }
+  }
+`;

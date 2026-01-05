@@ -22,6 +22,9 @@ import BarCodeScanner from './Pantallas/User/BarCodeScanner';
 import AdminStartPage from './Pantallas/Admin/AdStartPage';
 import AdminUsersPage from './Pantallas/Admin/AdUsersPage';
 import AdminProductsPage from './Pantallas/Admin/AdProductsPage';
+import AyudasList from './Pantallas/Admin/AdAyudasList';
+import AyudaForm from './Pantallas/Admin/AdAyudaForm';
+import AdPadecimientosPage from './Pantallas/Admin/AdPadecimientosPage';
 
 import ProtectedRoute from './auth/ProtectedRoute';
 
@@ -50,6 +53,10 @@ function App() {
         <Route path="/ad-inicio" element={<AdminStartPage />} />
         <Route path="/ad-usuarios" element={<AdminUsersPage />} />
         <Route path="/ad-productos" element={<AdminProductsPage />} />
+        <Route path="/ad-ayudas" element={<AyudasList />} /> 
+        <Route path="/ad-ayudas/nueva" element={<AyudaForm />} />
+        <Route path="/ad-ayudas/editar/:id" element={<AyudaForm />} />
+        <Route path="/ad-padecimientos" element={<AdPadecimientosPage />} />
 
         {/* Ruta de Prueba */}
         <Route path="/test" element={<TestQuery />} />

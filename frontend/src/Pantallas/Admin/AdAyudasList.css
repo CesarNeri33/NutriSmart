@@ -1,0 +1,61 @@
+.ayuda-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 8px;
+}
+
+.ayuda-title {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #222;
+}
+
+.ayuda-desc {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.ayuda-tags-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tag-group label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #888;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.tag.nutrient { background: #e3f2fd; color: #1976d2; }
+.tag.condition { background: #fbe9e7; color: #d84315; }
+
+.status-msg {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-weight: bold;
+}
+
+.empty-tag {
+  color: #ccc;
+  font-size: 12px;
+}

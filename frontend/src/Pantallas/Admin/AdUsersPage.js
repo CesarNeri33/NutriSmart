@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './AdUsersPage.css';
-import Header from '../../Componentes/Header';
+import AdHeader from '../../Componentes/AdHeader';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USUARIOS } from '../../graphql/query';
 import { AD_UPDATE_USUARIO, AD_DELETE_USUARIO, AD_UPDATE_FOTO_PERFIL } from '../../graphql/mutations';
@@ -26,7 +26,7 @@ const UsersAdminPage = () => {
 
   return (
     <div className="users-admin-container">
-      <Header />
+      <AdHeader />
 
       <div className="users-search">
         <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)}>
