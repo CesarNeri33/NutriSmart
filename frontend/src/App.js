@@ -25,6 +25,7 @@ import AdminProductsPage from './Pantallas/Admin/AdProductsPage';
 import AyudasList from './Pantallas/Admin/AdAyudasList';
 import AyudaForm from './Pantallas/Admin/AdAyudaForm';
 import AdPadecimientosPage from './Pantallas/Admin/AdPadecimientosPage';
+import AdminListsPage from './Pantallas/Admin/AdListPage';
 
 import ProtectedRoute from './auth/ProtectedRoute';
 
@@ -57,6 +58,7 @@ function App() {
         <Route path="/ad-ayudas/nueva" element={<AyudaForm />} />
         <Route path="/ad-ayudas/editar/:id" element={<AyudaForm />} />
         <Route path="/ad-padecimientos" element={<AdPadecimientosPage />} />
+        <Route path="/ad-listas" element={<AdminListsPage />} />
 
         {/* Ruta de Prueba */}
         <Route path="/test" element={<TestQuery />} />

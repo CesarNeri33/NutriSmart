@@ -1,139 +1,80 @@
-/* Estilos Específicos para StartPage */
-
-.start-page-container {
+/* --- CONTENEDOR ESPECÍFICO DE ADMIN --- */
+.ad-start-page-container {
     padding-top: 20px;
     width: 85%;
     margin: 0 auto;
     text-align: center;
 }
 
-.header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-}
-
-.header-top .title{
-    margin-top: 10px;
-}
-
-.brand-name {
-    font-size: 46px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    text-align: left;
-    margin: 0; /* Asegurar que no haya margen superior/inferior por defecto */
-    flex-grow: 1; /* Permitir que ocupe espacio para empujar el logo */
-}
-
-.mensaje-bienvenido {
+.ad-mensaje-bienvenido {
     text-align: center;
-    font-size: 40px;
+    font-size: 38px;
     font-weight: 700;
-    margin-bottom: 50px;
-    margin-top: 40px;
+    margin: 40px 0 50px 0;
     font-family: 'Fredoka', sans-serif;
     color: #333;
 }
 
-.ASPbotones {
-    display: flex;
-    flex-direction: column; 
-    gap: 25px;
-    width: 100%;
-    max-width: 350px;
-    margin: 0 auto;
-}
-
-.ASPbotones button {
-    border: none;
-    padding: 20px 30px;
-    font-size: 22px;
-    font-weight: bold;
-    border-radius: 15px;
-    cursor: pointer;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease-in-out;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/*.botones {
+/* --- GRID DE 6 BOTONES (2 filas x 3 columnas) --- */
+.ad-grid-menu {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); 
+    /* Usamos 3 columnas directas para que los 6 botones encajen perfecto */
+    grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
     width: 100%;
-    max-width: 500px; 
+    max-width: 650px; 
     margin: 0 auto;
 }
 
-.botones i {
-    padding: 5px;
-    font-size: 40px;
-}
-
-.botones button {
+/* Estilo base de los botones de Admin */
+.ad-btn {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     align-items: center;
     justify-content: center;
     border: none;
     aspect-ratio: 1 / 1; 
     width: 100%;
     padding: 15px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
-    border-radius: 15px;
+    border-radius: 20px;
     cursor: pointer;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease-in-out;
-}
-.botones button:nth-child(1),
-.botones button:nth-child(2),
-.botones button:nth-child(3) {
-    grid-column: span 2;
+    font-family: 'Fredoka', sans-serif;
 }
 
-.botones button:nth-child(4) {
-    grid-column: 2 / 4; 
+.ad-btn i {
+    padding-top: 10px;
+    font-size: 35px;
 }
 
-.botones button:nth-child(5) {
-    grid-column: 4 / 6;
-}*/
-
-.botones button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.3);
+.ad-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    filter: brightness(0.95);
 }
 
-.btn-usuario {
-    background-color: #A3D9D0; 
-    color: #000;
-}
+/* --- COLORES ÚNICOS --- */
+.ad-btn-usuarios { background-color: #A3D9D0; color: #333; }
+.ad-btn-productos { background-color: #11cfb0; color: #fff; }
+.ad-btn-listas { background-color: #EFE675; color: #333; }
+.ad-btn-ayuda { background-color: #F4A467; color: #fff; }
+.ad-btn-padecimientos { background-color: #f46767; color: #fff; }
+.ad-btn-salir { background-color: #d41a1a; color: #fff; }
 
-.btn-productos {
-    background-color: #11cfb0; 
-    color: #000;
-}
-
-.btn-listas {
-    background-color: #EFE675; 
-    color: #000;
-}
-
-.btn-ayuda {
-    background-color: #F4A467; 
-    color: #000;
-}
-
-.btn-padecimientos {
-    background-color: #f46767; 
-    color: #000;
-}
-
-.btn-cerrar-sesion {
-    background-color: #d41a1a; 
-    color: #000;
+/* --- RESPONSIVE --- */
+@media (max-width: 600px) {
+    .ad-grid-menu {
+        grid-template-columns: repeat(2, 1fr); /* 3 filas de 2 botones en móvil */
+        gap: 15px;
+        max-width: 400px;
+    }
+    .ad-btn {
+        font-size: 16px;
+    }
+    .ad-btn i {
+        font-size: 30px;
+    }
 }

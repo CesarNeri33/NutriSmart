@@ -1,3 +1,4 @@
+// src/Pantallas/Admin/AdStartPage.js
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdHeader from '../../Componentes/AdHeader';
@@ -39,38 +40,36 @@ const StartPage = () => {
     };
 
     return (
-        <div className="start-page-container">
-            
-            {/* Encabezado Superior con el Nombre de la Marca y el Logo */}
+        <div className="ad-start-page-container">
             <AdHeader />
 
-            <h2 className="mensaje-bienvenido">Bienvenido</h2>
+            <h2 className="ad-mensaje-bienvenido">Panel de Administración</h2>
 
-            {/* Contenedor de Botones de Navegación */}
-            <div className="ASPbotones">
+            {/* Contenedor con nombre único para evitar conflictos con la pantalla de usuario */}
+            <div className="ad-grid-menu">
                 
-                <button className="btn-usuario" onClick={handleAdmUsersClick}>
+                <button className="ad-btn ad-btn-usuarios" onClick={handleAdmUsersClick}>
                     Usuarios <i className="fa-solid fa-user"></i>
                 </button>
 
-                <button className="btn-productos" onClick={handleAdmProductsClick}>
+                <button className="ad-btn ad-btn-productos" onClick={handleAdmProductsClick}>
                     Productos <i className="fa-solid fa-bottle-water"></i>
                 </button>
                 
-                <button className="btn-listas" onClick={handleAdmListsClick}>
+                <button className="ad-btn ad-btn-listas" onClick={handleAdmListsClick}>
                     Listas <i className="fa-solid fa-list"></i>
                 </button>
                 
-                <button className="btn-ayuda" onClick={handleAdmHelpClick}>
+                <button className="ad-btn ad-btn-ayuda" onClick={handleAdmHelpClick}>
                     Ayudas <i className="fa-regular fa-circle-question"></i>
                 </button>
 
-                <button className="btn-padecimientos" onClick={handleAdmAilmentsClick}>
-                    Padecimientos <i class="fa-solid fa-heart-pulse"></i>
+                <button className="ad-btn ad-btn-padecimientos" onClick={handleAdmAilmentsClick}>
+                    Padecimientos <i className="fa-solid fa-heart-pulse"></i>
                 </button>
 
-                <button className="btn-cerrar-sesion" onClick={handleAdmLogout}>
-                    Cerrar sesión <i class="fa-solid fa-door-open"></i>
+                <button className="ad-btn ad-btn-salir" onClick={handleAdmLogout}>
+                    Salir <i className="fa-solid fa-door-open"></i>
                 </button>
                 
             </div>

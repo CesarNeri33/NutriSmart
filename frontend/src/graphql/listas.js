@@ -129,3 +129,55 @@ export const INSERT_PRODUCTO_A_LISTA = gql`
     }
   }
 `;
+
+// --- QUERIES ADICIONALES PARA EL ADMINISTRADOR ---
+
+// 1. Obtener absolutamente todas las listas del sistema
+export const GET_ALL_LISTAS_ADMIN = gql`
+  query GetAllListasAdmin {
+    lista_compra(order_by: {lista_id: desc}) {
+      lista_id
+      nombre
+      usuario_id
+    }
+  }
+`;
+
+// 2. Ver productos de cualquier lista (especial para el modal del admin)
+export const GET_PRODUCTOS_LISTA_ADMIN = gql`
+  query GetProductosListaAdmin($lista_id: Int!) {
+    lista_producto(
+      where: { lista_id: { _eq: $lista_id } }
+      order_by: { producto: { nombre: asc } } 
+    ) {
+      id
+      producto_id
+      cantidad
+      producto {
+        nombre
+      }
+    }
+  }
+`;
+
+// Agrega esto al final de src/graphql/listas.js si no existe
+export const GET_PRODUCTOS_BUSQUEDA = gql`
+  query GetProductosBusqueda {
+    producto {
+      producto_id
+      nombre
+    }
+  }
+`;
+
+export const UPDATE_NOMBRE_LISTA = gql`
+  mutation UpdateNombreLista($lista_id: Int!, $nombre: String!) {
+    update_lista_compra_by_pk(
+      pk_columns: { lista_id: $lista_id }, 
+      _set: { nombre: $nombre }
+    ) {
+      lista_id
+      nombre
+    }
+  }
+`;

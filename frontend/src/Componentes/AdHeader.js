@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Title from '../Componentes/Title';
-import Logo from '../Componentes/Logo';
+import AdLogo from '../Componentes/AdLogo';
 import UserAd from '../Componentes/UserAd';
 import './AdHeader.css'; // Reutilizamos los estilos del encabezado definidos en ListPage.css
 
@@ -13,7 +13,7 @@ const Header = () => {
             <Title />
             
             {/* Logo de la Aplicación (Centrado) */}
-            <Logo />
+            <AdLogo />
             
             {/* Ícono de Usuario (Perfil) */}
             <UserAd />
